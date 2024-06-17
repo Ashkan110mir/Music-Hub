@@ -1,0 +1,25 @@
+﻿
+.back_to_req
+{
+    color:yellow;
+}
+.back_to_req:visited
+{
+    color:yellow;
+}
+.full_req {
+    width: 100%;
+    border: 2px solid yellow;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: center;
+}
+.full_req textarea
+{
+    resize:none;
+    font-size:150%;
+    width:40%;
+    background-color:silver;
+}

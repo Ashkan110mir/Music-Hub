@@ -1,0 +1,15 @@
+﻿
+.main_comment td
+{
+    background-color:black;
+    font-size:130%;
+}
+.child_comment td {
+    background-color: rgba(41, 39, 37,0.5);
+font-size:90%;
+}
+.first_child {
+    margin-left: 90px;
+    padding-left: 90px;
+   
+}

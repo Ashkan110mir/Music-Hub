@@ -1,0 +1,69 @@
+﻿@model List<Contact_us>
+
+@{
+    Layout = "../Shared/_admin_layout.cshtml";
+    ViewBag.title = "مدیریت درخواست ها";
+}
+<table>
+    <tr>
+        <th>کد درخواست</th>
+        <th>نوع درخواست</th>
+        <th>وضعیت مشاهده</th>
+        <th>تاریخ درخواست</th>
+        <th>شماره تلفن</th>
+        <th>عملیات</th>
+    </tr>
+    @foreach (var req in Model)
+    {
+        <tr>
+            <td>@req.Request_Id</td>
+            @{
+                switch (req.Request_Type)
+                {
+                    case "Reqmusic":
+                        <td>درخواست آهنگ</td>
+                        break;
+                    case "Reqmusicvideo":
+                        <td>درخواست موزیک ویدیو</td>
+                        break;
+                    case "ReqCooperation":
+                        <td>درخواست همکاری</td>
+                        break;
+                    case "ReportBug":
+                        <td>گزارش اشکال</td>
+                        break;
+                    case "Other":
+                        <td>سایر</td>
+                        break;
+                    default:
+                        <td>ندارد</td>
+                        break;
+                }
+                if (req.see_by_admin == false)
+                {
+                    <td>دیده نشده</td>
+                }
+                else
+                {
+                    <td>دیده شده</td>
+                }
+                <td>@DateCuclutor.Toshamsi(req.CreatedDate)</td>
+            }
+            <td>@req.Phone_Number</td>
+            <td>
+                <a asp-action="Req_detail" asp-controller="ContactUs" asp-route-reqid="@req.Request_Id">مشاهده</a>
+                @{
+                    if (ViewBag.reqtype == 0)
+                    {
+                        <a asp-action="Delete_Req" asp-controller="ContactUs" asp-route-reqid="@req.Request_Id">حذف</a>
+                    }
+                    else
+                    {
+                        <a asp-action="Delete_Req" asp-controller="ContactUs" asp-route-reqid="@req.Request_Id" asp-route-reqtype="@ViewBag.reqtype">حذف</a>
+                    }
+                }
+            </td>
+
+        </tr>
+    }
+</table>

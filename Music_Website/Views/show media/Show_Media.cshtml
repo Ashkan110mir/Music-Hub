@@ -1,0 +1,18 @@
+﻿@model string[]
+@{
+    Layout = null;
+}
+@{
+    if(Model[0]=="2")
+    {
+        <video controls poster="~/Music Video/video-poster/@Model[2]">
+        <source src="~/Music Video/@Model[1]" style="width:100vw; height:100vh"/>
+        </video>
+    }
+    if(Model[0]=="3")
+    {
+        <img src="~/Music Video/video-poster/@Model[1]" />
+    }
+}
+
+

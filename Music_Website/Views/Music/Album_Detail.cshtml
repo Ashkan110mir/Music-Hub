@@ -1,0 +1,48 @@
+﻿@model Albums
+@{
+    Layout = "../Shared/_main_layout.cshtml";
+    <link rel="stylesheet" href="~/css/Album_info_stylecss.css" />
+}
+<section class="main">
+    <div class="album_info_section">
+        <h2>@Model.AlbumName</h2>
+        خواننده اصلی
+        <a asp-action="Singer_Info" asp-controller="Music" asp-route-singerid="@Model.main_singer.SingerId">@Model.main_singer.artistName</a>
+        خواننده های دیگر:
+        @if (Model.singers.Count > 0)
+        {
+            @foreach (var singer in Model.singers)
+            {
+                <a asp-action="Singer_Info" asp-controller="Music" asp-route-singerid="@singer.SingerId">@singer.artistName</a>
+            }
+        }
+        else
+        {
+            <a>ندارد</a>
+        }
+
+        <h2 class="album_music_list_h2">لیست آهنگ های این آلبوم</h2>
+        <div class="music_list">
+            @{
+                if(Model.musics.Count > 0)
+                {
+
+                    @foreach (var music in Model.musics)
+                    {
+                        <div class="musis">
+                            <img src="~/Images/Music Image/@music.Image_Filename" />
+                            <a asp-action="Full_Song" asp-controller="Music" asp-route-songid="@music.SongId">@music.Song_Name</a>
+                        </div>
+                    }
+
+                }
+                else
+                {
+                    <h2>آهنگی در این آلبوم افزوده نشده</h2>
+                }
+
+            }
+
+        </div>
+    </div>
+</section>

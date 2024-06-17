@@ -1,0 +1,147 @@
+﻿@model AdminDashboardViewModel
+@{
+    Layout = "../Shared/_admin_layout";
+    <link rel="stylesheet" href="~/css/admin layout/admin_dashboard_style.css" />
+    ViewBag.title = "داشبورد";
+
+}
+
+<main class="main-dashboard">
+    <section class="admin-left-side">
+        <nav>
+
+            <a asp-action="Music_Manage_Page" asp-controller="Music">
+
+                مدیریت آهنگ
+
+            </a>
+
+            <a asp-action="Get_Music_Video_Page" asp-controller="MusicVideo">
+
+                مدیریت موزیک ویدیو
+
+            </a>
+
+            <a asp-action="Get_remix_Page" asp-controller="Remix">
+
+                مدیریت ریمیکس
+
+            </a>
+
+            <a asp-action="Singer_page" asp-controller="Singer">
+
+                مدیریت خواننده
+
+            </a>
+
+
+            <a asp-action="Albums_Page" asp-controller="Album" asp-route-searchname="">
+
+                مدیریت آلبوم
+
+            </a>
+
+            <a asp-action="Comment_manage_Page" asp-controller="Comment">
+                مدیریت نظرات
+            </a>
+
+            <a asp-action="All_req" asp-controller="ContactUs" asp-route-reqtype="0">
+                مدیریت درخواست ها
+            </a>
+            <a asp-action="Index_Manage" asp-controller="MainMenu">
+                مدیریت صفحه اصلی
+            </a>
+            <a asp-action="Index" asp-controller="Home">
+                مشاهده وبسایت
+            </a>
+        </nav>
+    </section>
+    <section class="admin-right-side">
+        <aside>
+            <nav>
+
+                <div>
+                    <label for="music_count">تعداد آهنگ</label>
+                    <a id="music_count" asp-action="Music_Manage_Page" asp-controller="Music">@Model.Music_count</a>
+                </div>
+
+
+                <div>
+                    <label for="singer_count">تعداد خواننده</label>
+                    <a id="singer_count" asp-action="Singer_page" asp-controller="Singer">@Model.singer_count</a>
+                </div>
+
+
+                <div>
+                    <label for="mv_count">تعداد موزیک ویدئو</label>
+                    <a id="mv_count" asp-action="Get_Music_Video_Page" asp-controller="MusicVideo">@Model.music_video_count</a>
+                </div>
+
+
+                <div>
+                    <label for="remix_count">تعداد ریمیکس</label>
+                    <a id="remix_count" asp-action="Get_remix_Page" asp-controller="Remix">@Model.remix_count</a>
+                </div>
+
+
+                <div>
+                    <label for="album_count">تعداد آلبوم</label>
+                    <a id="album_count" asp-action="Albums_Page" asp-controller="Album">@Model.albums_count</a>
+                </div>
+
+
+                <div>
+                    <label for="ac_parent_comment">تعداد نظرات تایید شده</label>
+                    <a id="ac_parent_comment" asp-action="Show_comment" asp-controller="Comment" asp-route-post_type="4">@Model.accpect_parent_comment_count</a>
+                </div>
+
+
+                <div>
+                    <label for="notac_parent_comment">تعداد نظرات تایید نشده</label>
+                    <a id="notac_parent_comment" asp-action="Show_comment" asp-controller="Comment" asp-route-post_type="5">@Model.not_accpect_paremt_comment_count</a>
+                </div>
+
+
+                <div>
+                    <label for="parent_comment">تعداد کل نظرات</label>
+                    <a id="parent_comment" asp-action="Show_comment" asp-controller="Comment" asp-route-post_type="6">@Model.parent_comment_count</a>
+                </div>
+
+
+                <div>
+                    <label for="ac_child_comment">تعداد پاسخ تایید شده</label>
+                    <a id="ac_child_comment" asp-action="Show_comment" asp-controller="Comment" asp-route-post_type="7">@Model.accpect_child_comment_count</a>
+                </div>
+
+
+                <div>
+                    <label for="notac_child_comment">تعداد پاسخ تایید نشده</label>
+                    <a id="notac_child_comment" asp-action="Show_comment" asp-controller="Comment" asp-route-post_type="8">@Model.not_accpect_child_comment_count</a>
+                </div>
+
+
+                <div>
+                    <label for="child_comment">تعداد کل پاسخ ها </label>
+                    <a id="child_comment" asp-action="Show_comment" asp-controller="Comment" asp-route-post_type="9">@Model.child_comment_count</a>
+                </div>
+
+
+                <div>
+                    <label for="comment_count">تعداد کل نظرات و پاسخ ها</label>
+                    <a id="comment_count" asp-action="Comment_manage_Page" asp-controller="Comment">@Model.comment_count</a>
+                </div>
+
+
+                <div>
+                    <label for="not_see_contactus">تعداد درخواست های دیده نشده</label>
+                    <a id="not_see_contactus" asp-action="Show_Req" asp-controller="ContactUs" asp-route-req_type="2">@Model.notseeing_contactus</a>
+                </div>
+                <div>
+                    <label for="see_contactus">تعداد درخواست های دیده شده</label>
+                    <a id="see_contactus" asp-action="Show_Req" asp-controller="ContactUs" asp-route-req_type="1">@Model.seeing_contactus</a>
+                </div>
+
+            </nav>
+        </aside>
+    </section>
+</main>

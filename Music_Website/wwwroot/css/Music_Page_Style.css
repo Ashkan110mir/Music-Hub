@@ -1,0 +1,333 @@
+﻿
+
+a {
+    text-decoration: none;
+}
+
+h1 {
+    color: yellow;
+    display: block;
+    text-align: center;
+}
+
+.main {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+
+.search_song {
+    width: 25%;
+    border: 10px solid white;
+    font-size: 120%;
+    border-radius: 10px;
+}
+
+    .search_song h2 {
+        color: yellow;
+        display: inline-block;
+        margin-right: 5px;
+    }
+
+        .search_song h2::after {
+            content: '';
+            width: 100%;
+            display: block;
+            border: 2px solid yellow;
+        }
+
+    .search_song form {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: start;
+        align-content: center;
+        text-align: center;
+    }
+
+        .search_song form a:nth-child(1) {
+            color: white;
+        }
+
+        .search_song form label {
+            color: yellow;
+            text-align: right;
+            margin-top: 30px;
+        }
+
+        .search_song form a:nth-child(1):visited {
+            color: white;
+        }
+
+        .search_song form a:nth-child(1):hover {
+            color: yellow;
+        }
+
+        .search_song form > input {
+            width: 80%;
+            color: black;
+            border-radius: 10px;
+            font-size: 100%;
+        }
+
+        .search_song form > select {
+            width: 80%;
+            color: black;
+            border-radius: 10px;
+            font-size: 100%;
+        }
+
+        .search_song form div {
+            margin-top: 50px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-content: center;
+            height: 50px;
+        }
+
+            .search_song form div a {
+                margin-top: 10px;
+                font-size: 100%;
+                display: block;
+            }
+
+                .search_song form div a::after {
+                    content: '';
+                    width: 0;
+                    height: 2px;
+                    background-color: yellow;
+                    display: inline-block;
+                    transition: width 0.5s ease-in-out;
+                }
+
+                .search_song form div a:hover::after {
+                    width: 100%;
+                }
+
+
+            .search_song form div input[type=submit] {
+                font-size: 100%;
+                border: 3px solid yellow;
+                border-radius: 10px;
+                background-color: transparent;
+                color: yellow;
+            }
+
+                .search_song form div input[type=submit]:hover {
+                    background-color: yellow;
+                    color: black;
+                    cursor: pointer;
+                }
+
+
+
+
+
+.music_list {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.music {
+    font-size: 150%;
+    color: white;
+    width: 80%;
+    text-align: center;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border: 5px solid yellow;
+    height: 700px;
+    background-color: transparent;
+    border-radius: 15px;
+}
+
+    .music img {
+        width: 80%;
+        margin-right: 9%;
+        border: 5px solid white;
+        border-radius: 10px;
+        height: 400px;
+    }
+
+    .music div:nth-child(4) {
+        width: 100%;
+        height: 50px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-content: center;
+        flex-wrap: wrap;
+    }
+
+        .music div:nth-child(4) a:hover {
+            color: white;
+        }
+
+    .music a {
+        color: yellow;
+    }
+
+        .music a:visited {
+            color: yellow;
+        }
+
+.readmore {
+    color: yellow;
+    width: 100%;
+    border-radius: 10px;
+}
+
+
+
+.singer_cointaner {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+
+    .singer_cointaner a {
+        color: yellow;
+        margin: 5px;
+    }
+
+        .singer_cointaner a:visited {
+            color: yellow;
+        }
+
+        .singer_cointaner a:nth-child(Even) {
+            color: white;
+        }
+
+            .singer_cointaner a:nth-child(Even):visited {
+                color: white;
+            }
+
+
+.last_song {
+    width: 25%;
+    /*border: 10px solid white;*/
+}
+
+.music_footer {
+    width: 100%;
+    height: 100px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+
+.pagecontainer {
+    width: 30%;
+    height: 50px;
+    text-align: center;
+    font-size: 20px;
+}
+
+    .pagecontainer a {
+        margin: 10px;
+        color: white;
+    }
+
+.active {
+    color: yellow;
+}
+
+    .active:visited {
+        color: yellow;
+    }
+
+
+
+
+/*for remix*/
+.remix {
+    border: 2px solid yellow;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    margin: 20px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+
+    .remix a {
+        color: yellow;
+        margin: 10px;
+    }
+
+        .remix a:visited {
+            color: yellow;
+        }
+
+        .remix a:hover {
+            color: white;
+            cursor: pointer;
+        }
+
+        .remix a:visited:hover {
+            color: white;
+            cursor: pointer;
+        }
+/*for albums*/
+.album {
+    border: 2px solid yellow;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    margin: 20px;
+    width: 40%;
+    text-align: center;
+    border-radius: 10px;
+    max-height:200px;
+}
+
+.album_more_info {
+    font-size: 150%;
+    margin-top: 30px;
+}
+
+.album_more_info {
+    color: yellow;
+}
+
+    .album_more_info:visited {
+        color: yellow;
+    }
+
+    .album_more_info:hover {
+        color: white;
+        cursor: pointer;
+    }
+    .album_more_info:visited:hover {
+        color: white;
+        cursor: pointer;
+    }
+.album_line {
+    width: 100%;
+    background-color: white;
+    height: 0.5px;
+}
+.empty_space
+{
+    width:25%;
+}

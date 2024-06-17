@@ -1,0 +1,30 @@
+﻿@{
+    Layout = "../Shared/_main_layout.cshtml";
+    ViewBag.title = "تماس با ما";
+    ViewBag.style = "~/css/contact us.css";
+    <link rel="stylesheet" href="~/css/contact us.css">
+}
+<h1>
+    تماس با ما 
+</h1>
+<h2>@ViewBag.mess</h2>
+<section id="contact-us-container">
+    <form class="contact-us-form" asp-action="Add_contact_us" asp-controller="Home">
+        <label for="#req type">نوع درخواست </label>
+        <select id="req type" name="Request_Type">
+            <option value="Reqmusic">درخواست آهنگ یا ریمیکس</option>
+            <option value="Reqmusicvideo">درخواست موزیک ویدیو</option>
+            <option value="ReqCooperation">درخواست همکاری</option>
+            <option value="ReportBug">گزارش اشکال</option>
+            <option value="Other">سایر</option>
+        </select>  
+        <label for="#email" >آدرس ایمیل</label>
+        <input type="email" id="email" name="Email_address" />
+        <label for="#email">شماره تلفن</label>
+        <input type="text" id="Phone" name="Phone_Number" />
+        <label for="#text-area">متن درخواست</label>
+        <textarea id="text-area" name="Request_Text"></textarea>
+        <input type="submit" value="ارسال"/>
+        
+    </form>
+</section>

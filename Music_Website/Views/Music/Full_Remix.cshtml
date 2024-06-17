@@ -1,0 +1,138 @@
+﻿@model Music_Website.Models.Mian_Page_View_Model.Remix_comment_Viewmodel
+@{
+    Layout = "../Shared/_main_layout.cshtml";
+    ViewBag.title = Model.remix.RemixName;
+    <link rel="stylesheet" href="~/css/Full_music_style.css" />
+}
+<section class="Music">
+    <div class="music_info">
+        <div class="top_music">
+            <p> <i class="fa-solid fa-pencil" style="color:yellow">:</i> @Model.remix.admin.Admin_Name</p>
+        </div>
+
+        <div class="mid-music">
+            <h2>@Model.remix.RemixName</h2>
+        </div>
+
+
+        <div class="download-container">
+            <audio controls preload="metadata">
+                <source src="~/Music/Remix/@Model.remix.File_Name" />
+            </audio>
+
+            <a asp-action="Download_Remix" asp-controller="Music" asp-route-remix_name="@Model.remix.RemixName" asp-route-fileurl="@Model.remix.File_Name">دانلود </a>
+        </div>
+        <hr class="mid-line" />
+
+        <div class="more-info-container">
+            <div class="singer">
+                سازنده ریمیکس:
+                <a>@Model.remix.Remix_Creator</a>
+                @{
+                    <div class="album">
+                        آهنگ اصلی:
+                        @if (Model.remix.music != null)
+                        {
+
+                            <a asp-action="Full_Song" asp-controller="Music" asp-route-songid="@Model.remix.music.SongId">@Model.remix.music.Song_Name</a>
+                        }
+                        else
+                        {
+                            <h2>آهنگ اصلی ندارد</h2>
+                        }
+                    </div>
+                }
+            </div>
+
+        </div>
+
+
+
+    </div>
+</section>
+
+
+
+<hr />
+<h1 class="top-comment-text">نظرات</h1>
+<h2 class="message">@ViewBag.mess</h2>
+@{
+    if (Model.remix.comment_status == 0)
+    {
+
+        <h2 class="comment-are-close">نظرات برای این پست بسته است</h2>
+    }
+    else
+    {
+        <h3 class="send-your-comment-now">کامنت خود را ارسال کنید</h3>
+        <form class="new_comment" method="post" asp-action="Add_comment" asp-controller="Music" asp-route-commentfor="2" asp-route-id="@Model.remix.RemixId">
+            <input type="text" name="comment_Name" maxlength="200" required placeholder="نام شما" oninvalid="this.setCustomValidity('لطفا نام خود را وارد کنید')" oninput="setCustomValidity('')" />
+            <input type="email" name="Email_Address" required placeholder="ایمیل شما" oninvalid="this.setCustomValidity('لطفا ایمیل خود را وارد کنید')" oninput="setCustomValidity('')" />
+            <textarea name="Comment_Text" maxlength="900" required oninvalid="this.setCustomValidity('لطفا نظر خود را بنویسید ')" oninput="setCustomValidity('')" placeholder="متن نظر"></textarea>
+            <input type="submit" value="ارسال نظر" />
+        </form>
+    }
+}
+<hr class="last-line" />
+@{
+    if (Model.comments.Count > 0)
+    {
+        @foreach (var comment in Model.comments)
+        {
+            <div class="full-comment">
+                <div class="main-comment">
+                    <div class="comment-right-side">
+                        <h2>@comment.comment_Name:</h2>
+                        <p>@comment.Comment_Text</p>
+                    </div>
+                    <div class="comment-left-side">
+                        @if (Model.remix.comment_status != 0)
+                        {
+                            <form class="new-reply" method="post" asp-action="Add_Reply" asp-controller="Music" asp-route-parentid="@comment.CommentId" asp-route-replyfor="2" asp-route-postid="@Model.remix.RemixId" asp-route-replyto="@comment.comment_Name">
+                                <input type="text" name="comment_Name" maxlength="200" required placeholder="نام شما" oninvalid="this.setCustomValidity('لطفا نام خود را وارد کنید ')" oninput="setCustomValidity('')" />
+                                <input type="email" name="Email_Address" required placeholder="ایمیل شما" oninvalid="this.setCustomValidity('لطفا ایمیل خود را وارد کنید')" oninput="setCustomValidity('')" />
+                                <textarea name="Comment_Text" maxlength="900" required placeholder="متن نظر" oninvalid="this.setCustomValidity('لطفا پاسخ خود را بنویسید ')" oninput="setCustomValidity('')"></textarea>
+                                <input type="submit" value="ثبت پاسخ" />
+                            </form>
+                        }
+                        else
+                        {
+                            <h2 class="cant-add-reply">امکان ثبت پاسخ برای این پست وجود ندارد</h2>
+                        }
+                    </div>
+                </div>
+                <div class="reply-comment">
+                    @foreach (var child in comment.Child)
+                    {
+                        <div class="comment-right-side">
+                            <h2>@child.comment_Name:</h2>
+                            <p>@child.Comment_Text</p>
+                        </div>
+                        <div class="comment-left-side">
+                            @if (Model.remix.comment_status != 0)
+                            {
+                                <form class="new-reply" method="post" asp-action="Add_Reply" asp-controller="Music" asp-route-parentid="@comment.CommentId" asp-route-replyfor="2" asp-route-postid="@Model.remix.RemixId" asp-route-replyto="@child.comment_Name">
+                                    <input type="text" name="comment_Name" maxlength="200" required placeholder="نام شما" oninvalid="this.setCustomValidity('لطفا نام خود را وارد کنید ')" oninput="setCustomValidity('')" />
+                                    <input type="email" name="Email_Address" required placeholder="ایمیل شما" oninvalid="this.setCustomValidity('لطفا ایمیل خود را وارد کنید ')" oninput="setCustomValidity('')" />
+                                    <textarea name="Comment_Text" maxlength="900" required placeholder="متن پاسخ" oninvalid="this.setCustomValidity('لطفا پاسخ خود را بنویسید ')" oninput="setCustomValidity('')"></textarea>
+                                    <input type="submit" value="ثبت پاسخ" />
+                                </form>
+                            }
+                            else
+                            {
+                                <h2 class="cant-add-reply">امکان ثبت پاسخ برای این پست وجود ندارد</h2>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    }
+    else if (Model.remix.comment_status == 0)
+    {
+    }
+    else
+    {
+        <h2>نظری برای این پست وجود ندارد اولین نفر باشید که نظر میگذارد</h2>
+    }
+}

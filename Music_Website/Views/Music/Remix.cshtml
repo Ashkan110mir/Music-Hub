@@ -1,0 +1,79 @@
+﻿@model List<Remix>
+@{
+    Layout = "../Shared/_main_layout.cshtml";
+    ViewBag.title = "رمیکس";
+    <link rel="stylesheet" href="~/css/Music_Page_Style.css" />
+}
+<br />
+<h1>ریمیکس ها</h1>
+
+<section class="main">
+    <div class="search_song">
+        <h2>جست و جو کنید</h2>
+        <form asp-action="Remix" asp-controller="Music" asp-route-searchname="searchname" asp-route-searchcreator="searchcreator" asp-route-searchsong="searchsong" asp-route-orderby="orderby">
+            <label for="remixname">نام ریمیکس:</label>
+            <input type="search" id="remixname" name="searchname" value="@((ViewBag.searchname!=null?ViewBag.searchname:""))" />
+
+            <label for="creatorname">نام سازنده :</label>
+            <input type="search" id="creatorname" name="searchcreator" value="@((ViewBag.searchcreator!=null?ViewBag.searchcreator:""))" />
+
+            <label for="mainsong">نام آهنگ اصلی:</label>
+            <input type="search" id="mainsong" name="searchsong" value="@((ViewBag.searchsong!=null?ViewBag.searchsong:""))" />
+
+
+            <label for="orderbysearch">مرتبی سازی بر اساس:</label>
+            <select name="orderby" id="orderbysearch">
+                @{
+                    if (ViewBag.orderby == "orderbyname" || ViewBag.orderby == null)
+                    {
+                        <option value="orderbyname" selected>مرتب سازی بر اساس نام</option>
+                        <option value="orderbylast">مرتب سازی بر اساس آخرین</option>
+                        <option value="orderbyfirst">مرتب سازی بر اساس اولین</option>
+                    }
+                    if (ViewBag.orderby == "orderbylast")
+                    {
+                        <option value="orderbyname">مرتب سازی بر اساس نام</option>
+                        <option value="orderbylast" selected>مرتب سازی بر اساس آخرین</option>
+                        <option value="orderbyfirst">مرتب سازی بر اساس اولین</option>
+                    }
+                    if (ViewBag.orderby == "orderbyfirst")
+                    {
+                        <option value="orderbyname">مرتب سازی بر اساس نام</option>
+                        <option value="orderbylast">مرتب سازی بر اساس آخرین</option>
+                        <option value="orderbyfirst" selected>مرتب سازی بر اساس اولین</option>
+                    }
+
+                }
+            </select>
+            <div>
+                <a asp-action="Remix" asp-controller="Music" asp-route-pageid="1">حذف فیلتر ها</a>
+                <input type="submit" value="جست و جو" />
+            </div>
+        </form>
+    </div>
+    <div class="music_list">
+        @foreach (var remix in Model)
+        {
+            <article class="remix">
+                <h2>@remix.RemixName</h2>
+                <p>@remix.Remix_Creator</p>
+                <audio controls preload="none">
+                    <source src="~/Music/Remix/@remix.File_Name" />
+                </audio>
+                <a asp-action="Full_remix" asp-controller="Music" asp-route-remixid="@remix.RemixId">اطلاعات بیشتر</a>
+            </article>
+        }
+    </div>
+    <div class="last_song">
+    </div>
+</section>
+<section class="music_footer">
+    <div class="pagecontainer">
+        @{
+            for (int i = 1; i <= ViewBag.pagecount; i++)
+            {
+                <a asp-action="Remix" asp-controller="Music" asp-route-searchname="@ViewBag.searchname" asp-route-searchcreator="@ViewBag.searchcreator" asp-route-searchsong="@ViewBag.searchsong" asp-route-orderby="@ViewBag.orderby" asp-route-pageid="@i" class="@((ViewBag.curentpage==i?"active":""))">@i</a>
+            }
+        }
+    </div>
+</section>

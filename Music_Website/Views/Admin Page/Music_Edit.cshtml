@@ -1,0 +1,93 @@
+﻿@model Admin_Music_Page_ViewModel
+@{
+    Layout = "../Shared/_admin_layout.cshtml";
+    ViewBag.title = "ویرایش آهنگ";
+    <link rel="stylesheet" href="~/css/admin layout/music_manage_style.css" />
+}
+<span>/</span><a class="back_to_song" asp-action="Music_Manage_Page" asp-controller="Music">بازگشت به آهنگ ها</a>
+<h2> @ViewBag.error</h2>
+<div class="edit_music">
+
+    <form enctype="multipart/form-data" asp-action="Edit_Music" asp-controller="Music" method="post">
+        <label>خواننده ها</label>
+        @foreach (var singer in Model.Full_Singer)
+        {
+            <h2>@singer.artistName</h2>
+        }
+        <label for="album">آلبوم</label>
+        <select name="AlbumId" id="album">
+            <option value="0">ندارد</option>
+            @foreach (var album in Model.albums)
+            {
+                @if (ViewBag.albumid == album.AlbumId)
+                {
+                    <option selected value="@album.AlbumId">@album.AlbumName</option>
+                }
+                else
+                {
+                    <option value="@album.AlbumId">@album.AlbumName</option>
+                }
+
+            }
+        </select>
+        @foreach (var musicinfo in Model.Musics)
+        {
+
+            <input type="text" value="@musicinfo.SongId" name="SongId" style="display:none" />
+
+            <br />
+            <label for="songname">نام آهنگ</label>
+            <input type="text" value="@musicinfo.Song_Name" name="Song_Name" id="songname" />
+
+            <br />
+            <label for="songdes">توضیحات</label>
+            <textarea name="Song_Description" id="songdes">@musicinfo.Song_Description</textarea>
+
+            <br />
+            <label for="musicstyle">سبک آهنگ</label>
+            <select id="style" name="Music_Style">
+                <option value="@Model.Musics.FirstOrDefault().Music_Style">@Model.Musics.FirstOrDefault().Music_Style</option>
+                <option value="رپ">رپ</option>
+                <option value="کلاسیک">کلاسیک</option>
+                <option value="سنتی">سنتی</option>
+                <option value="راک">راک</option>
+                <option value="پاپ">پاپ</option>
+                <option value="متال">متال</option>
+                <option value="پانک">پانک</option>
+            </select>
+
+            <br />
+            <label for="commentstatus">وضعیت نظرات</label>
+            <select name="comment_status" id="commentstatus">
+                @if (musicinfo.comment_status == 0)
+                {
+                    <option value="0" selected>بسته</option>
+                    <option value="1">نیاز به تایید ادمین</option>
+                    <option value="2">باز</option>
+                }
+                else if (musicinfo.comment_status == 1)
+                {
+                    <option value="0">بسته</option>
+                    <option value="1" selected>نیاز به تایید ادمین</option>
+                    <option value="2">باز</option>
+                }
+                else
+                {
+                    <option value="0">بسته</option>
+                    <option value="1">نیاز به تایید ادمین</option>
+                    <option value="2" selected>باز</option>
+                }
+            </select>
+
+            <br />
+            <label for="imagefile">عکس کاور</label>
+            <input type="file" name="Image_File" id="imagefile" />
+
+            <br />
+            <label for="songfile">فایل آهنگ</label>
+            <input type="file" name="Song_File" id="songfile" />
+            <input type="submit" value="ویرایش" />
+        }
+    </form>
+
+</div>

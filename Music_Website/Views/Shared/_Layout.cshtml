@@ -1,0 +1,212 @@
+﻿<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <title>موزیک هاب</title>
+    <link rel="stylesheet" href="~/css/Main Index/style.css" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <link rel="icon" href="~/Images/music-6247190_1280.jpg" />
+    <script src="https://kit.fontawesome.com/c727f1eb92.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header id="header">
+        <div class="top-header">
+            <img src="~/Images/wp7359355.jpg" />
+            <div class="menu-nav">
+                <a href="">
+                    <h1>
+                        موزیک هاب
+                    </h1>
+                </a>
+                <a href="#media-nav">
+                    <h2>
+                        صفحه اصلی
+                    </h2>
+                </a>
+                <h2>
+                    |
+                </h2>
+                <a asp-action="music_page" asp-controller="Music">
+                    <h2>
+                        آهنگ ها
+                    </h2>
+                </a>
+            </div>
+        </div>
+        <div class="bottom-header">
+            <input type="checkbox" id="menu-checkbox" />
+            <label for="menu-checkbox">
+                <i class="fa-solid fa-bars"></i>
+            </label>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="#media-nav">
+                            <div>
+                                صفحه اصلی
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-action="music_page" asp-controller="Music">
+                            <div>
+                                آهنگ ها
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-action="MV_page" asp-controller="Music">
+                            <div>
+                                موزیک ویدیو
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-action="Remix" asp-controller="Music">
+                            <div>
+                                رمیکس
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-action="Album_Page" asp-controller="Music">
+                            <div>
+                                آلبوم ها
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-action="Singer_Page" asp-controller="Music">
+                            <div>
+                                خواننده ها
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-action="Contact_us" asp-controller="Home">
+                           <div>
+                               تماس با ما
+                           </div>
+                       </a>
+                    </li>
+                   
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+    <section id="media-nav">
+        <nav>
+            <ul>
+                <li>
+                    <a href="#fdsf">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="fa-brands fa-spotify"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#fsfsf">
+                        <i class="fa-brands fa-soundcloud"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#sad">
+                        <i class="fa-brands fa-telegram"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#gfsdfg">
+                        <i class="fa-brands fa-twitter"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="fa-brands fa-youtube"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </section>
+
+
+    <main id="main">
+        @RenderBody()
+    </main>
+
+    @*right footer*@
+    <footer id="footer">
+        <div class="right-footer">
+            <div class="footer-nav">
+
+                <ul>
+                    <li>
+                        <h2>
+                            تماس با ما
+                        </h2>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-phone"></i>
+                        09908752252
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-envelope"></i>
+                        ashkanmirdamadi110@gmail.com
+                    </li>
+                    <li class="join-us">
+                        <form>
+                            <input type="email" placeholder="خبرنامه" />
+                            <input type="submit" value="عضویت" />
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+
+        <div class="footer-left">
+            <div class="left-footer-nav" dir="ltr">
+                <nav>
+                    <ul>
+                        <li>
+                            <a>
+                                <i class="fa-brands fa-instagram"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <i class="fa-brands fa-telegram"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <i class="fa-brands fa-youtube"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <i class="fa-brands fa-spotify"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <i class="fa-brands fa-soundcloud"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <i class="fa-brands fa-twitter"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

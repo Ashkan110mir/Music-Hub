@@ -1,0 +1,93 @@
+﻿
+table
+{
+    font-size:110%;
+}
+.add_new_mv
+{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    border:2px solid yellow;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    align-content:center;
+}
+  .add_new_mv form
+  {
+      display:flex;
+      flex-direction:column;
+      width:100%;
+      justify-content:center;
+      align-content:center;
+      flex-wrap:wrap;
+      
+  }
+
+
+.add_new_mv form input,.add_new_mv form textarea
+{
+    width:40%;
+    background-color:silver;
+    font-size:130%;
+    border-radius:10px;
+}
+.select_singer {
+    width: 40%;
+    min-height: 500px;
+    color: white;
+    background-color: rgb(41, 39, 37);
+    font-size: 150%;
+    direction: ltr;
+}
+.comment_status {
+    width: 40%;
+    background-color: silver;
+    font-size: 130%;
+    border-radius: 10px;
+    text-align:center;
+}
+
+
+
+/*mv edit*/
+.edit_mv_container
+{
+    width:100%;
+
+    display:flex;
+    justify-content:center;
+    align-content:center;
+}
+    .edit_mv_container form {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        align-content: center;
+    }
+    .edit_mv_container form input, .edit_mv_container form select, .edit_mv_container textarea
+    {
+        background-color:silver;
+        font-size:120%;
+        border-radius:10px;
+
+    }
+    .edit_mv_container form a
+    {
+        color:yellow;
+    }
+    .edit_mv_container form a:visited
+    {
+        color:yellow;
+    }
+.backto_mv
+{
+    color:yellow;
+}
+.backto_mv:visited
+{
+    color:yellow;
+}
+

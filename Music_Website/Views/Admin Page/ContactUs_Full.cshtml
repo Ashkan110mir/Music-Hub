@@ -1,0 +1,38 @@
+﻿@model Contact_us
+@{
+    Layout = "../Shared/_admin_layout.cshtml";
+    <link rel="stylesheet" href="~/css/admin layout/Contact_us_page_style.css" />
+    ViewBag.title = "مشاهده درخواست ها";
+}
+<br />
+<div class="full_req">
+    <p>@ViewBag.mess</p>
+    <h2>@Model.Request_Id</h2>
+    @{
+        switch (Model.Request_Type)
+        {
+            case "Reqmusic":
+                <h2>درخواست آهنگ</h2>
+                break;
+            case "Reqmusicvideo":
+                <h2>درخواست موزیک ویدیو</h2>
+                break;
+            case "ReqCooperation":
+                <h2>درخواست همکاری</h2>
+                break;
+            case "ReportBug":
+                <h2>گزارش اشکال</h2>
+                break;
+            case "Other":
+                <h2>سایر</h2>
+                break;
+            default:
+                <h2>ندارد</h2>
+                break;
+        }
+    }
+    <h2>@Model.CreatedDate</h2>
+    <p>@Model.Email_address</p>
+    <p>@Model.Phone_Number</p>
+    <textarea readonly>@Model.Request_Text</textarea>
+</div>

@@ -1,0 +1,157 @@
+﻿body {
+    background-color: black;
+    color: silver;
+    direction: rtl;
+}
+textarea
+{
+    resize:none;
+}
+a {
+    text-decoration: none;
+}
+
+.exit {
+    font-size: 50%;
+    color: white;
+}
+
+    .exit:visited {
+        color: white;
+    }
+
+    .exit:hover {
+        color: red;
+    }
+
+    .exit:visited:hover {
+        color: red;
+    }
+
+.back_button {
+    color: yellow;
+}
+
+    .back_button:visited {
+        color: yellow;
+    }
+
+
+
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    color: navajowhite;
+    direction: ltr;
+}
+
+    table th {
+        height: 100px;
+        font-size: 120%;
+        color: yellow;
+    }
+
+    table tr {
+        width: 100%;
+    }
+
+        table tr td {
+            text-align: center;
+            font-size: 110%;
+        }
+
+tr:nth-child(odd) {
+    background-color: rgba(41, 39, 37,0.5);
+}
+
+table a {
+    color: navajowhite;
+    display: inline-block;
+}
+
+    table a:hover {
+        color: yellow;
+    }
+
+    table a::after {
+        content: '';
+        width: 100%;
+        display: block;
+        height: 2px;
+        background-color: navajowhite;
+    }
+
+.edit {
+    color: yellow;
+}
+
+
+    .edit:visited {
+        color: yellow;
+    }
+
+.delete {
+    color: orange;
+}
+
+    .delete:visited {
+        color: orange;
+    }
+
+
+
+.search {
+    margin-top: 50px;
+    text-align: center;
+}
+
+    .search input {
+        font-size: 150%;
+        background-color: silver;
+        border-radius:10px;
+    }
+
+        .search input[type=submit] {
+            cursor: pointer;
+        }
+.search a
+{
+    color:yellow;
+    font-size:150%;
+  display:inline-block;
+}
+.search a:hover
+{
+    color:white;
+
+}
+.search a::after
+{
+    content:'';
+    width:100%;
+    display:block;
+    height:2px;
+    background-color:white;
+}
+
+
+
+
+
+.page_numbers {
+    text-align: center;
+    margin-top: 30px;
+}
+
+    .page_numbers a {
+        color: yellow;
+        margin:10px;
+    }
+
+.active {
+    border:1px solid yellow;
+    border-radius:100px;
+    padding:10px;
+}

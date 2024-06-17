@@ -1,0 +1,67 @@
+﻿@model Music_Video
+@{
+    Layout = "../Shared/_admin_layout.cshtml";
+    ViewBag.title = "ویرایش موزیک ویدیو";
+    <link rel="stylesheet" href="~/css/admin layout/MV_manager_style.css" />
+}
+<span>/</span><a class="backto_mv" asp-action="Get_Music_Video_Page" asp-controller="MusicVideo">بازگشت به موزیک ویدیو ها</a>
+<h2>@ViewBag.error</h2>
+<div class="edit_mv_container">
+    <form method="post" enctype="multipart/form-data" asp-action="Edit_mv" asp-controller="Musicvideo" asp-route-mvid="mvid">
+
+        <input type="text" value="@Model.MVId" name="mvid" style="display:none" />
+
+        <label for="mvname">نام موزیک ویدیو</label>
+        <input type="text" id="mvname" value="@Model.Mvname" name="Mvname" />
+
+        <br />
+        <label for="mvdes">توضیحات موزیک ویدیو</label>
+        <textarea name="Mv_Describe" id="mvdes">@Model.Mv_Describe</textarea>
+
+        <br />
+        <lable for="mvdate">تاریخ انتشار</lable>
+        <input name="Mv_publishdate" type="date" id="mvdate" value="@Model.Mv_publishdate" />
+
+        <br />
+        <label for="mvcomment">وضعیت نظرات</label>
+        <select id="mvcomment" name="comment_status">
+            @{
+                if (Model.comment_status == 0)
+                {
+                    <option value="0" selected>بسته</option>
+                    <option value="1">نیاز به تایید ادمین</option>
+                    <option value="2">باز</option>
+                }
+                if (Model.comment_status == 1)
+                {
+                    <option value="0">بسته</option>
+                    <option value="1" selected>نیاز به تایید ادمین</option>
+                    <option value="2">باز</option>
+                }
+                if (Model.comment_status == 2)
+                {
+                    <option value="0">بسته</option>
+                    <option value="1">نیاز به تایید ادمین</option>
+                    <option value="2" selected>باز</option>
+                }
+
+            }
+        </select>
+
+        <br />
+        <label for="posterFile">فایل پوستر</label>
+        <input type="file" id="posterFile" name="MvposterFile" />
+        <a asp-action="show_media" asp-controller="Admin" asp-route-show_media_type="3" asp-route-url="@Model.MvposterName">@Model.File_Name</a>
+
+
+        <br />
+        <label for="mvfile">فایل موزیک ویدیو</label>
+        <input type="file" id="mvfile" name="MVfile" />
+        <a asp-action="show_media" asp-controller="Admin" asp-route-show_media_type="2" asp-route-url="@Model.File_Name" asp-route-posterpath="@Model.MvposterName">@Model.File_Name</a>
+
+        <br />
+        <input type="submit" value="ویرایش" />
+
+    </form>
+
+</div>

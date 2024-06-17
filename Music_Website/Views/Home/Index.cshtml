@@ -1,0 +1,91 @@
+﻿@model Music_Website.Models.Mian_Page_View_Model.Index_ViewModel
+<section class="top-main">
+    <h1>
+        اکنون تماشا کنید
+    </h1>
+    @{
+        if (Model.Music_Video == null)
+        {
+            <div class="video-container">
+                <video poster="~/Music Video/video-poster/falcon_black_white.jpg" *@ controls preload="none" width="500px" height="500px">
+                    <source src="~/Music Video/kabk.mp4" />
+                </video>
+            </div>
+        }
+        else
+        {
+            <div class="video-container">
+                <video poster="~/Music Video/video-poster/@Model.Music_Video.MvposterName" *@ controls preload="none" width="500px" height="500px">
+                    <source src="~/Music Video/@Model.Music_Video.File_Name" />
+                </video>
+            </div>
+        }
+    }
+</section>
+<section class="bottom-main">
+    <h1>
+        همین الان دانلود کنید
+    </h1>
+    <div class="music-container">
+        @{
+            if (Model.musics.Count > 0)
+            {
+                @foreach (var music in Model.musics)
+                {
+                    <div class="music">
+                        <div class="music-img">
+                            <img src="~/Images/Music Image/@music.Image_Filename">
+                        </div>
+                        <div class="music-play">
+                            <h2>
+                                @music.Song_Name
+                            </h2>
+                            <hr />
+                            <audio controls>
+                                <source src="~/Music/@music.Song_FileName">
+                            </audio>
+                            <a asp-action="Download_Music" asp-controller="Music" asp-route-song_name="@music.Song_Name" asp-route-fileurl="@music.Song_FileName">                   
+                                    دانلود      
+                            </a>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                @for (int i = 1; i < 10; i++)
+                {
+                    <div class="music">
+                        <div class="music-img">
+                            <img src="~/Images/music-6247190_1280.jpg">
+
+                        </div>
+                        <div class="music-play">
+                            <h2>
+
+                                دانلود آهنگ Imaging dragon demond
+                            </h2>
+                            <audio controls>
+                                <source src="~/Music/3phrBeatz - Fadaei X Pishro X Hichkas X Wilson X Ho3ein X  MJ X Shayea.mp3">
+                            </audio>
+                            <a>
+                                <button>
+                                    دانلود 320
+                                </button>
+                                <button>
+                                    دانلود 128
+                                </button>
+                            </a>
+                        </div>
+
+                    </div>
+                }
+            }
+        }
+    </div>
+    <a asp-action="music_page" asp-controller="Music">
+        <button>
+            مشاهده بیشتر
+        </button>
+    </a>
+</section>

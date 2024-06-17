@@ -1,0 +1,117 @@
+﻿@model Albums_Singer_ViewModel
+@{
+    Layout = "../Shared/_admin_layout.cshtml";
+    ViewBag.Title = "افزودن آلبوم";
+    <link rel="stylesheet" href="~/css/admin layout/Album_manage_page_Style.css" />
+}
+
+<hr />
+
+
+<section class="add_album">
+    <h3>@ViewBag.terror</h3>
+
+    <form method="post" asp-action="Add_Albums" asp-controller="Album" asp-route-name="name" asp-route-singerid="singerid">
+        <label for="albumname">نام آلبوم</label>
+        <input type="text" name="name" id="albumname" required maxlength="50" oninvalid="this.setCustomValidity('لطفا نام آلبوم را وارد کنید')" oninput="setCustomValidity('')" />
+
+        <label for="mainsinger">انتخاب خواننده اصلی</label>
+        <select name="singersid" id="mainsinger" class="main_singer">
+            @foreach (var singer in Model.singers)
+            {
+                <option value="@singer.Id">@singer.ArtistName</option>
+            }
+        </select>
+
+
+        @*   <label for="selectsinger">خواننده های دیگر آلبوم</label>
+        <select id="selectsinger" class="other_singer" name="singersid" multiple>
+        @foreach (var singers in Model.singers)
+        {
+        <option value="@singers.Id">
+        @singers.ArtistName
+        </option>
+        }
+        </select> *@
+        <input type="submit" value="افزودن" />
+    </form>
+</section>
+<hr />
+<form class="search" method="post" asp-action="Albums_Page" asp-controller="Album" asp-route-searchname="searchname">
+    <input type="search" name="searchname" id="search" placeholder="جست و جو آلبوم" required oninvalid="this.setCustomValidity('لطفا عبارت جست و جو را وارد کنید')" oninput="setCustomValidity('')" />
+    <input type="submit" value="جست و جو" />
+    <br />
+    <a asp-action="Albums_Page" asp-controller="Album">
+        حذف فیلتر
+    </a>
+</form>
+
+@{
+    if (Model.albums.Count > 0)
+    {
+        <h3>@ViewBag.berror</h3>
+        <div class="table_container">
+            <table>
+                <tr>
+                    <th>کد آلبوم</th>
+                    <th>نام آلبوم</th>
+                    <th>تعداد آهنگ</th>
+                    <th>خواننده اصلی</th>
+                    <th>خواننده های دیگر</th>
+                    <th>مدیریت</th>
+                </tr>
+                @foreach (var albums in Model.albums)
+                {
+                    <tr>
+                        <td>@albums.AlbumId</td>
+                        <td>
+                            <a asp-action="Album_Deteil" asp-controller="Music" asp-route-albumid="@albums.AlbumId">@albums.AlbumName</a>
+                        </td>
+                        <td>@albums.AlbumCount</td>
+                        <td>
+                            <a asp-action="Singer_Info" asp-controller="Music" asp-route-singerid="@albums.main_singer.SingerId">@albums.main_singer.artistName</a>
+                            <img src="~/Images/Singer Image/@albums.main_singer.profile_picture_name" width="50px" height="50px" />
+                        </td>
+                        <td>
+                            @{
+                                if (albums.singers.Count != 0)
+                                {
+                                    @foreach (var singers in albums.singers)
+                                    {
+                                        <div class="singer_info_container">
+                                            <a asp-action="Singer_Info" asp-controller="Music" asp-route-singerid="@singers.SingerId">@singers.artistName</a>
+                                            <img src="~/Images/Singer Image/@singers.profile_picture_name" width="50px" height="50px" />
+                                            <br />
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <p>ندارد</p>
+                                }
+                            }
+                        </td>
+                        <td>
+                            <a asp-action="Delete_Album" asp-controller="Album" asp-route-albumid="@albums.AlbumId">
+                                حذف
+                            </a>
+                            <a asp-action="Edit_Album_page" asp-controller="Album" asp-route-albumid="@albums.AlbumId">
+                                ویرایش
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div class="page_numbers">
+            @for (int i = 1; i <= ViewBag.pagecount; i++)
+            {
+                <a asp-action="Albums_Page" asp-controller="Album" asp-route-pageid="@i" class="@((ViewBag.currentpage==i)?"active":"")">@i</a>
+            }
+        </div>
+    }
+    else
+    {
+        <h2>آلبومی موجود نیست</h2>
+    }
+}

@@ -1,0 +1,96 @@
+﻿.add_music_container {
+    width: 100%;
+    border: 2px solid yellow;
+    text-align: center;
+}
+
+    .add_music_container form input {
+    }
+
+.error_massage
+{
+    color:red;
+}
+
+.select_singer select {
+    width: 50%;
+    min-height: 500px;
+    color: white;
+    background-color: rgb(41, 39, 37);
+    font-size: 150%;
+    direction: ltr;
+}
+.hidden_singer_list
+{
+    display:none;
+}
+
+.select_singer {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+    .select_singer input[type=submit] {
+        border: none;
+        background-color: transparent;
+        color: white;
+        font-size: 150%;
+    }
+
+        .select_singer input[type=submit]:hover {
+            cursor: pointer;
+            background-color: rgba(41, 39, 37,0.5);
+            color: white;
+        }
+
+
+
+
+.add_music {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-between;
+}
+
+    .add_music input,.add_music select,.add_music textarea {
+       background-color:silver;
+       font-size:120%;
+       border-radius:15px;
+    }
+    .add_music textarea
+    {
+        resize:none;
+    }
+
+
+
+
+
+/*edit music*/
+.edit_music
+{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    align-content:center;
+}
+    .edit_music form input, .edit_music form textarea, .edit_music form select {
+        width: 100%;
+        font-size: 150%;
+        background-color:silver;
+    }
+.back_to_song
+{
+    color:yellow;
+}
+.back_to_song:visited
+{
+    color:yellow;
+}

@@ -1,0 +1,18 @@
+//complete user style 
+//make remove filter button in every admin pages
+//add tag base on music style
+//complete admin style
+//create download method
+//check input in front for comment
+//sort singer and album by name in admin pages
+//change how album work
+//delete singer make music with no singers remove
+//make not found page
+//back end check input text lenght
+//create admin not seen comment controller
+//create admin seen and not seen request 
+//add show post comment in music and mv and remix manager
+add email sender
+make suggest music
+
+

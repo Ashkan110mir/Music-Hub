@@ -1,0 +1,99 @@
+﻿.main {
+    color: white;
+    display: flex;
+    justify-content: center;
+    font-size: 130%;
+}
+
+.singer_info {
+    width: 80%;
+    border:1px solid gold;
+}
+
+.singer_personal_info {
+    width: 100%;
+    text-align: center;
+}
+
+.singer_alnums {
+    width: 100%;
+}
+
+    .singer_alnums h2, .singer_music h2, .singer_mv h2 {
+        display: inline-block;
+        font-size: 110%;
+        color: gold;
+    }
+
+        .singer_alnums h2::after, .singer_music h2::after, .singer_mv h2::after {
+            content: '';
+            width: 100%;
+            display: block;
+            height: 2px;
+            background-color: yellow;
+        }
+
+
+    .singer_alnums a {
+        color: silver;
+        margin: 10px;
+    }
+
+        .singer_alnums a:visited {
+            color: silver;
+        }
+
+        .singer_alnums a:hover {
+            color: yellow;
+        }
+
+        .singer_alnums a:visited:hover {
+            color: yellow;
+        }
+
+/*hr {
+    background-color:yellow;
+    width: 100%;
+}*/
+
+.singer_music {
+    width: 100%;
+}
+
+    .singer_music a {
+        color: silver;
+        margin: 10px;
+    }
+
+        .singer_music a:visited {
+            color: silver;
+        }
+
+        .singer_music a:hover {
+            color: yellow;
+        }
+
+        .singer_music a:visited:hover {
+            color: yellow;
+        }
+
+.singer_mv {
+    width: 100%;
+}
+
+    .singer_mv a {
+        color: silver;
+        margin: 10px;
+    }
+
+        .singer_mv a:visited {
+            color: silver;
+        }
+
+        .singer_mv a:hover {
+            color: yellow;
+        }
+
+        .singer_mv a:visited:hover {
+            color: yellow;
+        }

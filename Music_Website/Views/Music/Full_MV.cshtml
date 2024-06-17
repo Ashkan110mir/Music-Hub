@@ -1,0 +1,138 @@
+﻿@model Music_Website.Models.Mian_Page_View_Model.MV_Comment_ViewModel
+@{
+    Layout = "../Shared/_main_layout.cshtml";
+    ViewBag.title = Model.MV.Mvname;
+    <link rel="stylesheet" href="~/css/Full_music_style.css" />
+}
+<section class="Music">
+    <div class="music_info">
+        <div class="top_music">
+            <p id="musicdate"><i class="fas fa-calendar-alt" style="color:yellow">:</i> @DateCuclutor.Toshamsi(Model.MV.Mv_publishdate)</p>
+            <p> <i class="fa-solid fa-pencil" style="color:yellow">:</i> @Model.MV.admin.Admin_Name</p>
+        </div>
+
+        <div class="mid-music">
+            <h2>@Model.MV.Mvname</h2>
+            <video poster="~/Music Video/video-poster/@Model.MV.MvposterName" controls preload="metadata">
+                <source src="~/Music Video/@Model.MV.File_Name" />
+            </video>
+        </div>
+
+        <div class="Song_Description">
+            <h2>توضیحات</h2>
+            <p>@Model.MV.Mv_Describe</p>
+
+        </div>
+
+
+
+
+        <div class="download-container">
+            <a asp-action="Download_Mv" asp-controller="Music" asp-route-mv_name="@Model.MV.Mvname" asp-route-fileurl="@Model.MV.File_Name">دانلود</a>
+        </div>
+        <div class="more-info-container">
+            <div>@DateCuclutor.Toshamsi(Model.MV.Mv_publishdate)</div>
+            <div class="singer">
+                خواننده:
+                @foreach (var singer in Model.MV.singers)
+                {
+                    <a asp-action="Singer_Info" asp-controller="Music" asp-route-singerid="@singer.SingerId">@singer.artistName</a>
+                }
+            </div>
+        </div>
+
+        <hr />
+    </div>
+</section>
+
+
+
+<hr />
+<h1 class="top-comment-text">نظرات</h1>
+<h2 class="message">@ViewBag.mess</h2>
+@{
+    if (Model.MV.comment_status == 1 || Model.MV.comment_status == 2)
+    {
+        <h3 class="send-your-comment-now">کامنت خود را ارسال کنید</h3>
+        <form class="new_comment" asp-action="Add_comment" asp-controller="Music" asp-route-commentfor="3" asp-route-id="@Model.MV.MVId">
+            <input type="text" name="comment_Name" maxlength="200" required placeholder="نام شما" oninvalid="this.setCustomValidity('لطفا نام خود را وارد کنید ')" oninput="setCustomValidity('')" />
+            <input type="email" name="Email_Address" required placeholder="ایمیل شما" oninvalid="this.setCustomValidity('لطفا ایمیل خود را وارد کنید ')" oninput="setCustomValidity('')" />
+            <textarea name="Comment_Text" maxlength="900" required placeholder="متن نظر" oninvalid="this.setCustomValidity('لطفا نظر خود را بنویسید ')" oninput="setCustomValidity('')"></textarea>
+            <input type="submit" value="ثبت نظر" />
+
+        </form>
+
+    }
+    else
+    {
+        <h2 class="comment-are-close">نظرات برای این پست بسته است</h2>
+    }
+}
+<hr class="last-line" />
+@{
+
+
+    if (Model.comments.Count > 0)
+    {
+        @foreach (var comment in Model.comments)
+        {
+            <div class="full-comment">
+                <div class="main-comment">
+                    <div class="comment-right-side">
+                        <h2>@comment.comment_Name:</h2>
+                        <p>@comment.Comment_Text</p>
+                    </div>
+                    <div class="comment-left-side">
+                        @if (Model.MV.comment_status != 0)
+                        {
+                            <form class="new-reply" method="post" asp-action="Add_Reply" asp-controller="Music" asp-route-replyfor="3" asp-route-postid="@Model.MV.MVId" asp-route-parentid="@comment.CommentId" asp-route-replyto="@comment.comment_Name">
+                                <input type="text" name="comment_Name" maxlength="200" required placeholder="نام شما" oninvalid="this.setCustomValidity('لطفا نام خود را وارد کنید ')" oninput="setCustomValidity('')" />
+                                <input type="email" name="Email_Address" required placeholder="ایمیل شما" oninvalid="this.setCustomValidity('لطفا ایمیل خود را وارد کنید ')" oninput="setCustomValidity('')" />
+                                <textarea name="Comment_Text" maxlength="900" required placeholder="متن پاسخ" oninvalid="this.setCustomValidity('لطفا پاسخ خود را بنویسید ')" oninput="setCustomValidity('')"></textarea>
+                                <input type="submit" value="ثبت پاسخ" />
+                            </form>
+                        }
+                        else
+                        {
+                            <h2 class="cant-add-reply">امکان ثبت پاسخ برای این پست وجود ندارد</h2>
+                        }
+                    </div>
+                </div>
+                <div class="reply-comment">
+                    @foreach (var childcomment in comment.Child)
+                    {
+                        <div class="comment-right-side">
+                            <h2>@childcomment.comment_Name:</h2>
+                            <p>@childcomment.Comment_Text</p>
+                        </div>
+                        <div class="comment-left-side">
+                            @if (Model.MV.comment_status != 0)
+                            {
+                                <form class="new-reply" method="post" asp-action="Add_Reply" asp-controller="Music" asp-route-replyfor="3" asp-route-postid="@Model.MV.MVId" asp-route-parentid="@comment.CommentId" asp-route-replyto="@childcomment.comment_Name">
+                                    <input type="text" name="comment_Name" maxlength="200" placeholder="نام شما" required oninvalid="this.setCustomValidity('لطفا نام خود را وارد کنید ')" oninput="setCustomValidity('')" />
+                                    <input type="email" name="Email_Address" placeholder="ایمیل شما" required oninvalid="this.setCustomValidity('لطفا ایمیل خود را وارد کنید ')" oninput="setCustomValidity('')" />
+                                    <textarea name="Comment_Text" maxlength="900" placeholder="متن پاسخ" required oninvalid="this.setCustomValidity('لطفا پاسخ خود را بنویسید ')" oninput="setCustomValidity('')"></textarea>
+                                    <input type="submit" value="ثبت پاسخ" />
+                                </form>
+                            }
+                            else
+                            {
+                                <h2 class="cant-add-reply">امکان ثبت پاسخ برای این پست وجود ندارد</h2>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    }
+    else if (Model.MV.comment_status == 0)
+    {
+    }
+    else
+    {
+        <h2 class="first-one-add-comment">کامنتی برای این پست وجود ندارد .اولین نفر نظر بگذارید</h2>
+    }
+}
+
+
+</div>

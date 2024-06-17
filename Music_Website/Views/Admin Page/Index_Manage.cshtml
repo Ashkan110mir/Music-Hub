@@ -1,0 +1,71 @@
+﻿@model Mian_index_viewmodel
+@{
+    Layout = "../Shared/_admin_layout.cshtml";
+    ViewBag.title = "مدیریت صفحه اصلی";
+    <link rel="stylesheet" href="~/css//admin layout/Main_index_manage_page_style.css" />
+}
+<h2>@ViewBag.deletemess</h2>
+<section class="selected_song">
+    <h2>آهنگ های انتخاب شده</h2>
+    @{
+        if (Model.Selected_Music.Count > 0)
+        {
+            foreach (var music in Model.Selected_Music)
+            {
+                <div>
+                    <a class="song_name" asp-action="Full_Song" asp-controller="Music" asp-route-songid="@music.SongId">@music.Song_Name</a>
+                    <a class="delete_selceted_song" asp-action="Delete_Selected_Music" asp-controller="MainMenu" asp-route-musicid="@music.SongId">حذف</a>
+                </div>
+            }
+        }
+        else
+        {
+            <div>ندارد</div>
+        }
+    }
+</section>
+<div class="selected_mv">
+    <h1>موزیک ویدیو انتخاب شده</h1>
+    @{
+
+        if (Model.Selected_mv != null)
+        {
+            <a class="mv_name" asp-action="Full_Mv" asp-controller="Music" asp-route-mvid="@Model.Selected_mv.MVId">@Model.Selected_mv.Mvname</a>
+            <a class="delete_mv" asp-action="Delete_Selected_Mv" asp-controller="MainMenu" asp-route-mvid="@Model.Selected_mv.MVId">حذف</a>
+        }
+        else
+        {
+            <div>ندارد</div>
+        }
+    }
+</div>
+<hr />
+<section class="select_new_mv_song">
+
+    <div class="select_new_song">
+        <h1>انتخاب آهنگ جدید</h1>
+        <h2>@ViewBag.musicmess</h2>
+        <form asp-action="Select_new_Music" asp-controller="MainMenu" asp-route-musicid="musicid">
+            <select multiple name="musicid">
+                @foreach (var music in Model.Select_new_Music)
+                {
+                    <option value="@music.SongId">@music.Song_Name</option>
+                }
+            </select>
+            <input type="submit" value="ثبت" />
+        </form>
+    </div>
+    <hr />
+    <div class="select_new_mv">
+        <form asp-action="Select_new_mv" asp-controller="MainMenu" asp-route-mvid="mvid">
+            <select name="mvid">
+                @foreach (var mv in Model.select_new_mv)
+                {
+                    <option value="@mv.MVId">@mv.Mvname</option>
+                  
+                }
+            </select>
+            <input type="submit" value="انتخاب" />
+        </form>
+    </div>
+</section>

@@ -1,0 +1,19 @@
+﻿/*404*/
+.show_error {
+    width: 100%;
+    color:white;
+    display:flex;
+    flex-direction:column;
+    flex-wrap:wrap;
+    align-content:space-between;
+    align-content:center;
+}
+.show_error h1
+{
+    text-align:center;
+}
+.show_error img
+{
+    width:40%;
+
+}

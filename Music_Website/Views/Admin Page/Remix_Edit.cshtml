@@ -1,0 +1,75 @@
+﻿@model Admin_Remix_Viewmodel
+@{
+    Layout = "../Shared/_admin_layout.cshtml";
+    ViewBag.title = "ویرایش ریمیکس";
+    <link rel="stylesheet" href="~/css/admin layout/Remix_manage_page_style.css" />
+}
+<span>/</span><a class="back_to_Remix" asp-action="Get_remix_Page" asp-controller="Remix">بازگشت به ریمیکس ها</a>
+<h2>@ViewBag.error</h2>
+<div class="edit_remix">
+    <form method="post" enctype="multipart/form-data" asp-action="Edit_remix" asp-controller="Remix" asp-route-music_id="music_id">
+        @foreach (var remix in Model.remixes)
+        {
+            <input type="text" value="@remix.RemixId" style="display:none" name="RemixId" />
+
+            <label for="remixname">نام ریمیکس</label>
+            <input type="text" id="remixname" value="@remix.RemixName" name="RemixName" />
+
+            <br />
+            <label for="remixcreator">سازنده ریمیکس</label>
+            <input type="text" id="remixcreator" value="@remix.Remix_Creator" name="Remix_Creator" />
+
+            <br />
+            <label for="commentstatus">وضعیت نظرات</label>
+            <select id="commentstatus" name="comment_status">
+                @{
+
+                    if (@remix.comment_status == 0)
+                    {
+                        <option value="0" selected>بسته</option>
+                        <option value="1">نیاز به تایید ادمین</option>
+                        <option value="2">باز</option>
+                    }
+                    if (@remix.comment_status == 1)
+                    {
+                        <option value="0">بسته</option>
+                        <option value="1" selected>نیاز به تایید ادمین</option>
+                        <option value="2">باز</option>
+                    }
+                    if (@remix.comment_status == 2)
+                    {
+                        <option value="0">بسته</option>
+                        <option value="1">نیاز به تایید ادمین</option>
+                        <option value="2" selected>باز</option>
+                    }
+                }
+            </select>
+        }
+
+        <br />
+        <label for="musicid">آهنگ اصلی</label>
+        <select id="musicid" name="music_id">
+            <option value="0">ندارد</option>
+            @foreach (var music in Model.music_name)
+            {
+                if (ViewBag.mainsongid == music.Id)
+                {
+                    <option selected value="@music.Id">@music.Name</option>
+                }
+                else
+                {
+                    <option value="@music.Id">@music.Name</option>
+                }
+            }
+        </select>
+
+        <br />
+        <label for="remixfile">فایل ریمیکس</label>
+        <input type="file" id="remixfile" name="Remixfile" />
+
+        <br />
+        <input type="submit" value="ویرایش" />
+
+
+    </form>
+</div>

@@ -1,0 +1,23 @@
+﻿@{
+    // Layout = "../Shared/_admin_layout.cshtml";
+    Layout = "";
+    <title>ورود به پنل ادمین</title>
+    <link rel="icon" href="~/Images//music-6247190_1280.jpg" />
+    <link rel="stylesheet" href="~/css/admin layout/Admin_Login_Style.css" />
+}
+<div class="login_contianer">
+    
+    <h1>ورود به حساب ادمین</h1>
+    <br />
+    <p class="message">@ViewBag.mess</p>
+    <form method="post" asp-action="Admin_Login" asp-controller="Admin" asp-route-username="username" asp-route-password="password" asp-route-remembreme="remembreme">
+        <input type="text" placeholder="username" name="username" />
+        <input type="password" placeholder="Passowrd" name="password" />
+        <div class="remeberme">
+            <label for="rememberme">مرا به خاطر بسپار</label>
+            <input type="checkbox" id="remembreme" name="remembreme" value="true" />
+        </div>
+        <input type="submit" value="ورود" />
+    </form>
+
+</div>

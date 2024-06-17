@@ -1,0 +1,168 @@
+﻿@model Admin_Music_Video_Viewmodel
+@{
+    Layout = "../Shared/_admin_layout.cshtml";
+    ViewBag.title = "مدیریت موزیک ویدیو ها";
+    <link rel="stylesheet" href="~/css/admin layout/MV_manager_style.css" />
+}
+<section class="add_new_mv">
+    <h2>@ViewBag.error</h2>
+    <form method="post" enctype="multipart/form-data" asp-action="Add_mvmusic" asp-controller="Musicvideo" asp-route-singerid="singerid">
+        <select multiple name="singerid" class="select_singer" required oninvalid="this.setCustomValidity('لطفا خواننده را انتخاب کنید')" oninput="setCustomValidity('')">
+            @foreach (var singers in Model.singerlist)
+            {
+                <option value="@singers.Id">@singers.ArtistName</option>
+            }
+        </select>
+
+        <br />
+        <label for="mvname">نام موزیک ویدیو</label>
+        <input type="text" id="mvname" name="Mvname" maxlength="60" required oninvalid="this.setCustomValidity('لطفا نام موزیک ویدیو را وارد کنید')" oninput="setCustomValidity('')" />
+
+        <br />
+        <label for="mvdes">توضیحات موزیک ویدیو</label>
+        <textarea id="mvdes" name="Mv_Describe" required oninvalid="this.setCustomValidity('لطفا توضیحاتی برای موزیک ویدیو وارد کنید')" oninput="setCustomValidity('')"></textarea>
+
+        <br />
+        <label for="date">تاریخ انتشار</label>
+        <input type="date" id="date" name="Mv_publishdate" />
+        <br />
+        <label for="commentstatus">وضعیت نظرات</label>
+        <select id="commentstatus" name="comment_status" class="comment_status">
+            <option value="0">بسته</option>
+            <option value="1">نیاز به تایید ادمین</option>
+            <option value="2">باز</option>
+        </select>
+
+        <br />
+        <label for="posterFile">تصویر پوستر</label>
+        <input type="file" id="posterFile" name="MvposterFile" required oninvalid="this.setCustomValidity('لطفا عکسی برای تامنیل موزیک ویدیو وارد کنید ')" oninput="setCustomValidity('')" />
+
+
+        <br />
+        <label for="mvfile">فایل موزیک ویدیو</label>
+        <input type="file" id="mvfile" name="MVfile" required oninvalid="this.setCustomValidity('لطفا فایل موزیک ویدیو را انتخاب کنید')" oninput="setCustomValidity('')" />
+
+        <br />
+        <input type="submit" value="افزودن" />
+    </form>
+</section>
+@{
+    <h2> @ViewBag.berror</h2>
+    if (Model.music_video != null)
+    {
+        <form class="search" asp-action="Get_Music_Video_Page" asp-controller="Musicvideo" asp-route-searchname="searchname">
+            <input type="text" placeholder="جست و جو" name="searchname" required oninvalid="this.setCustomValidity('لطفا عبارت جست و جو را وارد کنید')" oninput="setCustomValidity('')" />
+            <input type="submit" value="جست و جو" />
+            <br />
+            <a asp-action="Get_Music_Video_Page" asp-controller="Musicvideo" asp-route-pageid="1">حذف فیلتر</a>
+        </form>
+        <table>
+            <tr>
+                <th>
+                    کد موزیک ویدیو
+                </th>
+
+                <th>
+                    نام موزیک ویدیو
+                </th>
+
+                <th>
+                    توضیحات موزیک ویدیو
+                </th>
+
+                <th>
+                    تاریخ انتشار
+                </th>
+
+                <th>
+                    مشاهده تصویر
+                </th>
+
+                <th>
+                    مشاهده موزیک ویدیو
+                </th>
+
+                <th>
+                    وضعیت نظرات
+                </th>
+
+                <th>
+                    خواننده ها
+                </th>
+
+                <th>
+                    نویسنده
+                </th>
+
+                <th>
+                    مدیریت
+                </th>
+            </tr>
+            @foreach (var mv in Model.music_video)
+            {
+                <tr>
+                    <td>@mv.MVId</td>
+                    <td>
+                        <a asp-action="Full_Mv" asp-controller="Music" asp-route-mvid="@mv.MVId">@mv.Mvname</a>
+                    </td>
+                    <td>@mv.Mv_Describe</td>
+                    <td>@DateCuclutor.Toshamsi(mv.Mv_publishdate)</td>
+                    <td>
+                        <a asp-action="Show_media" asp-controller="Admin" asp-route-url="@mv.MvposterName" asp-route-show_media_type="3">
+                            @mv.MvposterName
+                        </a>
+                    </td>
+                    <td>
+                        <a asp-action="show_media" asp-controller="Admin" asp-route-url="@mv.File_Name" asp-route-show_media_type="2" asp-route-posterpath="@mv.MvposterName">
+                            @mv.File_Name
+                        </a>
+                        <br />
+                    </td>
+                    @switch (mv.comment_status)
+                    {
+                        case 0:
+                            <td>بسته</td>
+                            break;
+                        case 1:
+                            <td>نیاز به تایید ادمین</td>
+                            break;
+                        case 2:
+                            <td>باز</td>
+                            break;
+
+                    }
+                    <td>
+                        @foreach (var singer in mv.singers)
+                        {
+                            <a asp-action="Singer_Info" asp-controller="Music" asp-route-singerid="@singer.SingerId">@singer.artistName</a>
+                        }
+                    </td>
+                    <td>@mv.admin.Admin_Name</td>
+                    <td>
+                        <a asp-action="Remove_mvmusic" asp-controller="Musicvideo" asp-route-mvid="@mv.MVId" asp-route-mvfilename="@mv.File_Name">
+                            حذف
+                        </a>
+                        <a asp-action="Edit_Mvmusic_page" asp-controller="Musicvideo" asp-route-mvid="@mv.MVId">
+                            ویرایش
+                        </a>
+                        <a asp-action="Show_comment" asp-controller="Comment" asp-route-postid="@mv.MVId" asp-route-post_type="3">
+                            دیدن نظرات
+                        </a>
+                    </td>
+                </tr>
+            }
+        </table>
+        <div class="page_numbers">
+            @for (int i = 1; i <= ViewBag.pagecount; i++)
+            {
+                <a asp-action="Get_Music_Video_Page" asp-controller="Musicvideo" asp-route-pageid="@i" class="@((ViewBag.currentpage==i)?"active":"")">@i</a>
+            }
+        </div>
+    }
+    else
+    {
+        <h2>موزیک ویدیو موجود نیست</h2>
+    }
+}
+
+

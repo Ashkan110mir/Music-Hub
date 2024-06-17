@@ -1,0 +1,85 @@
+﻿@model Singer
+@{
+    Layout = "../Shared/_main_layout.cshtml";
+    <link rel="stylesheet" href="~/css/Singer_Info_style.css" />
+    ViewBag.title = Model.artistName;
+}
+<div class="main">
+    <div class="singer_info">
+        <div class="singer_personal_info">
+            <h2>@Model.artistName</h2>
+            <img src="~/Images/Singer Image/@Model.profile_picture_name" />
+            <p>نام اصلی خواننده: @Model.SingerName @Model.Singer_Lastname</p>
+        </div>
+        @{
+            <div class="singer_alnums">
+
+                <h2>آلبوم های این خواننده</h2>
+                <br />
+                @if (Model.is_main_singer.Count>0)
+                {
+                    @foreach (var albums in Model.is_main_singer)
+                    {
+                        <a asp-action="Album_Deteil" asp-controller="Music" asp-route-albumid="@albums.AlbumId">@albums.AlbumName</a>
+                    }
+                }
+                else
+                {
+                    <p>البومی برای این خواننده موجود نمی باشد</p>
+                }
+            </div>
+
+            <hr />
+            <div class="singer_alnums">
+                <h2>آلبوم هایی که این خواننده در آن حضور دارد</h2>
+                <br />
+                @if(Model.Albums.Count>0)
+                {
+                    @foreach (var albums in Model.Albums)
+                    {
+                        <a asp-action="Album_Deteil" asp-controller="Music" asp-route-albumid="@albums.AlbumId">@albums.AlbumName</a>
+                    }
+                }
+                else
+                {
+                    <p>این خواننده در آلبومی حضور ندارد</p>
+                }
+            </div>
+
+
+            <hr />
+            <div class="singer_music">
+                <h2>آهنگ های این خواننده</h2>
+                <br />
+                @if (Model.musics.Count > 0)
+                {
+                    @foreach (var Song in Model.musics)
+                    {
+                        <a asp-action="Full_Song" asp-controller="Music" asp-route-songid="@Song.SongId">@Song.Song_Name</a>
+                    }
+                }
+                else
+                {
+                    <p>آهنگی برای این خواننده موجود نمی باشد</p>
+                }
+            </div>
+            <hr />
+            <div class="singer_mv">
+                <h2>موزیک ویدیو های این خواننده</h2>
+                <br />
+                @if (Model.music_Videos.Count > 0)
+                {
+                    @foreach (var MV in Model.music_Videos)
+                    {
+                        <a asp-action="Full_Mv" asp-controller="Music" asp-route-mvid="@MV.MVId">@MV.Mvname</a>
+                    }
+                }
+                else
+                {
+                    <p>موزیک ویدیو برای این خواننده موجود نمی باشد</p>
+                }
+            </div>
+        }
+    </div>
+
+</div>

@@ -1,0 +1,20 @@
+﻿@model Albums_Singer_ViewModel
+@{
+    Layout = "../Shared/_admin_layout.cshtml";
+    ViewBag.title = "ویرایش آلبوم";
+    <link rel="stylesheet" href="~/css//admin layout/Album_manage_page_Style.css" />
+}
+<span>/</span><a class="back_to_album" asp-action="Albums_Page" asp-controller="Album">بازگشت به آلبوم ها</a>
+<div class="edit_album">
+    <form method="post" asp-action="Edit_Album" asp-controller="Album">
+        @foreach (var album in Model.albums)
+        {
+            <input type="text" value="@album.AlbumId" name="AlbumId" style="display:none" />
+            <label for="albumname">نام آلبوم</label>
+            <input type="text" placeholder="@album.AlbumName" id="albumname" name="AlbumName" />
+        }
+
+        <input type="submit" value="ویرایش" />
+
+    </form>
+</div>

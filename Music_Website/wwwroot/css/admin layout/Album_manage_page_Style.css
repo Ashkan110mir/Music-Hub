@@ -1,0 +1,88 @@
+﻿.add_album
+{
+    width:100%;
+    display:flex;
+
+    
+}
+    .add_album form {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-content: center;
+        width: 100%;
+
+    }
+        .add_album form select, .add_album form input {
+            width:40%;
+            background-color:silver;
+            border-radius:10px;
+            margin:10px;
+            font-size:120%;
+
+        }
+.other_singer {
+    width: 40%;
+    min-height: 500px;
+}
+
+
+.main_singer {
+    height: 30px;
+    width: 50%;
+}
+
+
+.table_container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.table_container table
+{
+    width:80%;
+}
+.singer_info_container
+{
+    margin:20px;
+}
+
+
+/*edit album*/
+.back_to_album
+{
+    color:yellow;
+
+}
+.back_to_album:visited
+{
+    color:yellow;
+}
+.edit_album {
+    width: 100%;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+.edit_album form
+{
+    width:50%;
+    display:flex;
+    flex-wrap:wrap;
+    flex-direction:column;
+    justify-content:space-evenly;
+    align-content:center;
+}
+.edit_album form input,.edit_album form select
+{
+    font-size:130%;
+    background-color:silver;
+    margin:10px;
+}
+.edit_album form select
+{
+    width:100%;
+    min-height:500px;
+}
+

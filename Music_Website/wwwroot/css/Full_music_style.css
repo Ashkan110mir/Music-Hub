@@ -1,0 +1,395 @@
+﻿.music_info {
+    width: 65%;
+    border: 10px solid gold;
+    color: white;
+    font-size: 120%;
+    text-align: center;
+}
+
+.top_music {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+.mid-music {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+    .mid-music img {
+        display: block;
+        width: 50%;
+    }
+
+    .mid-music h2 {
+        text-align: center;
+        display: block;
+    }
+
+.Song_Description {
+    width: 50%;
+    border: 2px dotted orange;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    margin-right: 25%;
+}
+
+    .Song_Description h2 {
+        display: inline-block;
+        text-align: right;
+        color: yellow;
+    }
+
+        .Song_Description h2::after {
+            content: '';
+            display: block;
+            width: 90%;
+            height: 2px;
+            background-color: yellow;
+        }
+
+.download-container {
+    flex-wrap: wrap;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: center;
+}
+
+    .download-container audio {
+        width: 40%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+        font-size: 120%;
+        color: yellow;
+        border-radius: 15px;
+        padding: 10px;
+        margin-top: 30px;
+    }
+
+    .download-container a {
+        width: 40%;
+        border: 2px solid yellow;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+        font-size: 120%;
+        color: yellow;
+        border-radius: 15px;
+        padding: 10px;
+        margin-top: 30px;
+    }
+
+        .download-container a:hover {
+            background-color: yellow;
+            color: black;
+            cursor: pointer;
+        }
+
+.mid-line {
+    width: 100%;
+    height: 2px;
+    background-color: gold;
+}
+
+.more-info-container {
+    width: 100%;
+    display: flex;
+    align-content: start;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    text-align: right;
+    margin-right: 10px;
+}
+
+    .more-info-container div a:nth-child(2n+1) {
+        color: yellow;
+    }
+
+        .more-info-container div a:nth-child(2n+1):hover {
+            color: white;
+        }
+
+        .more-info-container div a:nth-child(2n+1):visited {
+            color: yellow;
+        }
+
+            .more-info-container div a:nth-child(2n+1):visited:hover {
+                color: white;
+            }
+
+    .more-info-container div a:nth-child(2n) {
+        color: white;
+    }
+
+        .more-info-container div a:nth-child(2n):hover {
+            color: yellow;
+        }
+
+        .more-info-container div a:nth-child(2n):visited {
+            color: white;
+        }
+
+            .more-info-container div a:nth-child(2n):visited:hover {
+                color: yellow;
+            }
+
+
+.album {
+    width: 100%;
+    margin-top: 15px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.top-comment-text {
+    color: yellow;
+    display: inline-block;
+    margin-right: 20px;
+}
+
+    .top-comment-text::after {
+        content: '';
+        width: 100%;
+        height: 2px;
+        background-color: yellow;
+        display: block;
+    }
+
+.message
+{
+    color:darkred;
+}
+
+.new_comment {
+    width: 40%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+    .new_comment textarea {
+        resize: none;
+        background-color: transparent;
+        width: 50%;
+        color: yellow;
+        font-size: 110%;
+        margin: 20px 30px 30px 30px;
+        height: 50px;
+        border: 2px solid yellow;
+        border-radius: 15px;
+        padding: 20px;
+    }
+
+        .new_comment textarea::placeholder {
+            color: white;
+        }
+
+        .new_comment textarea:focus {
+            outline: none;
+        }
+
+    .new_comment input[type=text], .new_comment input[type=email] {
+        background-color: transparent;
+        border: 2px solid yellow;
+        padding: 10px;
+        border-radius: 15px;
+        color: yellow;
+        width: 35%;
+        margin: 30px;
+        font-size: 110%;
+    }
+
+        .new_comment input[type=text]:focus-visible, .new_comment input[type=email]:focus-visible {
+            outline: none;
+        }
+
+    .new_comment input::placeholder {
+        color: white;
+    }
+
+    .new_comment input[type=submit] {
+        background-color: transparent;
+        color: yellow;
+        border: 2px solid yellow;
+        border-radius: 15px;
+        height: 40px;
+        margin: 45px 0 30px 0;
+        padding: 20px;
+        font-size: 110%;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        flex-wrap: wrap;
+    }
+
+        .new_comment input[type=submit]:hover {
+            color: black;
+            cursor: pointer;
+            background-color: gold;
+        }
+
+.send-your-comment-now {
+    color: yellow;
+    width: 36%;
+    text-align: center;
+    display: inline-block;
+}
+
+    .send-your-comment-now::after {
+        content: '';
+        width: 30%;
+        height: 1px;
+        display: inline-block;
+        background-color: white;
+        margin-bottom: 5px;
+    }
+
+    .send-your-comment-now::before {
+        content: '';
+        width: 30%;
+        height: 1px;
+        display: inline-block;
+        background-color: white;
+        margin-bottom: 5px;
+    }
+
+
+.last-line
+{
+    width:100%;
+    color:white;
+    border:1px dotted white;
+}
+
+.first-one-add-comment {
+    color: white;
+    margin-right: 20px;
+}
+
+.comment-are-close {
+    color: white;
+    margin-right: 20px;
+}
+
+
+.cant-add-reply {
+    font-size: 100%;
+}
+
+.full-comment {
+    width: 50%;
+    color: yellow;
+    margin-right:10px;
+    margin-top:50px;
+}
+
+.main-comment {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 2px solid yellow;
+}
+
+.comment-right-side {
+    width: 60%;
+    margin-right:10px;
+}
+
+.comment-left-side {
+    border: 2px solid orange;
+    width: 30%;
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    text-align:center;
+}
+
+.reply-comment {
+    margin-right: 50px;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width:100%;
+    flex-wrap:wrap;
+    border:1px solid white;
+}
+
+.new-reply input[type=text], .new-reply input[type=email] {
+    background-color: transparent;
+    color:white;
+    width:100%;
+}
+
+    .new-reply input[type=text]::placeholder, .new-reply input[type=email]::placeholder {
+        color: white;
+    }
+
+.new-reply textarea {
+    background-color: transparent;
+    color:white;
+    resize:none;
+    width:100%;
+}
+
+    .new-reply textarea::placeholder {
+        color: white;
+    }
+
+.new-reply input[type=submit] {
+    color: white;
+    background-color: transparent;
+    border: 2px solid yellow;
+    border-radius: 15px;
+}
+.new-reply input[type=submit]:hover
+{
+    background-color:gold;
+    color:black;
+    cursor:pointer;
+    
+}
+
+
+/*its form music video*/
+video[poster]
+{
+    object-fit:fill;
+    height:100%;
+    resize:both;
+
+}
+video {
+    width: 100%;
+    height:100%;
+    max-height:600px;
+}

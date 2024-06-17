@@ -1,0 +1,93 @@
+﻿@model List<Singer>
+@{
+
+    ViewBag.Title = "مدیریت خواننده ها";
+    Layout = "../Shared/_admin_layout.cshtml";
+    <link rel="stylesheet" href="~/css/admin layout/Singer_manager_page_style.css" />
+}
+<h2>@ViewBag.error</h2>
+<section class="add_new_singer">
+    <form method="post" enctype="multipart/form-data" asp-action="Add_Singer" asp-controller="Singer">
+        <label for="singername">اسم خواننده</label>
+        <input type="text" name="SingerName" id="singername" required maxlength="50" oninvalid="this.setCustomValidity('لطفا نام خواننده را وارد کنید')" oninput="setCustomValidity('')" />
+        <br />
+        <label for="singerlastname">نام خوانوادگی خواننده</label>
+        <input type="text" name="Singer_Lastname" id="singerlastname" required maxlength="50" oninvalid="this.setCustomValidity('لطفا فامیل خواننده را وارد کنید')" oninput="setCustomValidity('')" />
+        <br />
+        <label for="artisname">نام هنری</label>
+        <input type="text" name="artistName" id="artistname" required maxlength="50" oninvalid="this.setCustomValidity('لطفا نام هنری خواننده را وارد کنید')" oninput="setCustomValidity('')" />
+        <br />
+        <label for="singerpic">عکس خواننده</label>
+        <input type="file" name="Picture_File" id="singerpic" required oninvalid="this.setCustomValidity('لطفا عکس خواننده را آپلود کنید')" oninput="setCustomValidity('')" />
+
+        <input type="submit" value="افزودن" />
+    </form>
+</section>
+<hr />
+
+<h2>@ViewBag.messeage</h2>
+<div>
+    <form class="search" asp-action="Singer_page" asp-controller="Singer" asp-route-searchname="serachname">
+        <input type="search" name="serachname" required oninvalid="this.setCustomValidity('لطفا عبارت جست و جو را وارد کنید')" oninput="setCustomValidity('')" />
+        <input type="submit" value="جست و جو" />
+        <br />
+        <a asp-action="Singer_page" asp-asp-controller="Singer">
+            حذف فیلتر
+        </a>
+    </form>
+
+</div>
+@{
+    if (Model.Count < 1)
+    {
+        <h3>خواننده ایی موجود نیست</h3>
+    }
+    else
+    {
+
+
+        <table>
+            <tr>
+                <th>کد خواننده</th>
+                <th>نام خواننده</th>
+                <th>فامیل خواننده</th>
+                <th>نام هنری</th>
+                <th>عکس خواننده</th>
+                <th>مدیریت</th>
+
+            </tr>
+            @foreach (var singers in Model)
+            {
+                <tr>
+                    <td>@singers.SingerId</td>
+                    <td>@singers.SingerName</td>
+                    <td>@singers.Singer_Lastname</td>
+                    <td>
+                        <a asp-action="Singer_Info" asp-controller="Music" asp-route-singerid="@singers.SingerId">@singers.artistName</a>
+                    </td>
+                    <td>
+                        <img src="/Images/Singer Image/@singers.profile_picture_name" width="100px" height="100px" />
+                    </td>
+                    <td>
+                        <a asp-action="Get_Edit_Singer" asp-controller="Singer" asp-route-singerid="@singers.SingerId">
+                            ویرایش
+                        </a>
+                        <a asp-action="Remove_Singer" asp-controller="Singer" asp-route-singerid="@singers.SingerId" asp-route-pic="@singers.profile_picture_name">
+                            حذف
+                        </a>
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <div class="page_numbers">
+            @for (int i = 1; i <= ViewBag.pagecount; i++)
+            {
+                <a asp-action="Singer_page" asp-controller="Singer" asp-route-pageid="@i" class="@((ViewBag.currentpage==i)?"active":"")">@i</a>
+            }
+        </div>
+    }
+}
+
+
+

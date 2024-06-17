@@ -1,0 +1,16 @@
+﻿<html>
+    <head>
+        <title>@ViewBag.Title</title>
+        <link rel="icon" href="~/Images/music-6247190_1280.jpg">
+        <link rel="stylesheet" href="~/css/admin layout/Admin_layout.css" />
+    </head>
+    <body>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <h1>کاربر: @User.Identity.Name   <a class="exit" asp-action="Admin_Logout" asp-controller="Admin">خروج</a></h1>
+        
+    }
+    <a class="back_button" asp-action="admin_page" asp-controller="Admin">بازگشت به صفحه اصلی</a>
+        @RenderBody()
+    </body>
+</html>

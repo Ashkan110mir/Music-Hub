@@ -1,0 +1,254 @@
+﻿@model Admin_Music_Page_ViewModel
+@{
+    Layout = "../Shared/_admin_layout.cshtml";
+    ViewBag.title = "مدیریت آهنگ ها";
+    <link rel="stylesheet" href="~/css/admin layout/music_manage_style.css" />
+}
+
+@{
+    <section class="add_music_container">
+
+        <h2> خواننده اهنگ را انتخاب کنید</h2>
+        <h2 class="error_massage"> @ViewBag.error</h2>
+        @if (Model.Full_Singer == null)
+        {
+            <form class="select_singer" asp-action="Get_Album" asp-controller="Music" asp-route-singerid="singerid">
+                <select multiple name="allsingerid">
+                    @foreach (var singers in Model.singers)
+                    {
+                        <option value="@singers.Id">@(singers.ArtistName)</option>
+                    }
+                </select>
+                <input type="submit" value="شروع افزودن" />
+            </form>
+        }
+
+        else
+        {
+            <form class="add_music" method="post" enctype="multipart/form-data" asp-action="Add_Music" asp-controller="Music" asp-route-singerid="singerid" asp-route-albumid="albumid">
+                <label for="selectsinger">انتخاب خواننده</label>
+                <select multiple name="allsingerid" id="selectsinger" class="hidden_singer_list">
+                    @foreach (var singers in Model.Full_Singer)
+                    {
+                        <option selected value="@singers.SingerId">@(singers.SingerName)&nbsp@(singers.Singer_Lastname)&nbsp(@singers.artistName)</option>
+                    }
+                </select>
+
+                @foreach (var singers in Model.Full_Singer)
+                {
+                    <h4>@(singers.SingerName)&nbsp@(singers.Singer_Lastname)&nbsp(@singers.artistName)</h4>
+                }
+                <br />
+
+                <label for="selectalbum">انتخاب البوم</label>
+                <select id="selectalbum" name="albumid">
+                    @if (Model.albums != null)
+                    {
+                        <option value="0">ندارد</option>
+                        @foreach (var singeralbum in Model.albums)
+                        {
+                            <option value="@singeralbum.AlbumId">@singeralbum.AlbumName</option>
+                        }
+                    }
+                    else
+                    {
+                        <h2>select singer to see albums</h2>
+                    }
+                </select>
+                <br />
+
+                <label for="name">نام آهنگ</label>
+                <input type="text" id="name" name="Song_Name" required maxlength="70" oninvalid="this.setCustomValidity('لطفا نام آهنگ را وارد کنید')" oninput="setCustomValidity('')" />
+
+                <br />
+                <label for="describe">متن آهنگ</label>
+                <textarea id="describe" name="Song_Description" required oninvalid="this.setCustomValidity('لطفا متن آهنگ را  وارد کنید')" oninput="setCustomValidity('')"></textarea>
+
+                <br />
+                <label for="commentstatus">وضعیت نظرات</label>
+                <select id="commentstatus" name="comment_status">
+                    <option value="0">بسته</option>
+                    <option value="1">نیاز به تایید ادمین</option>
+                    <option value="2">باز</option>
+                </select>
+
+                <br />
+                <label for="style">سبک آهنگ</label>
+                <select id="style" name="Music_Style">
+                    <option value="رپ">رپ</option>
+                    <option value="کلاسیک">کلاسیک</option>
+                    <option value="سنتی">سنتی</option>
+                    <option value="راک">راک</option>
+                    <option value="پاپ">پاپ</option>
+                    <option value="متال">متال</option>
+                    <option value="پانک">پانک</option>
+                </select>
+
+                <br />
+                <label for="picturefile">عکس کاور</label>
+                <input type="file" id="picturefile" name="Image_File" required oninvalid="this.setCustomValidity('لطفا عکس کاور را انتخاب کنید')" oninput="setCustomValidity('')" />
+
+                <br />
+                <label for="songfile">فایل آهنگ</label>
+                <input type="file" id="songfile" name="Song_File" required oninvalid="this.setCustomValidity('لطفا فایل آهنگ را انتخاب کنید')" oninput="setCustomValidity('')" />
+
+                <br />
+
+                <input type="submit" value="افزودن" />
+            </form>
+            <hr />
+        }
+
+
+    </section>
+    <div>
+
+        <form class="search" asp-action="Music_Manage_Page" asp-controller="Music" asp-route-searchname="searchname">
+
+            <input type="text" placeholder="جست و جو" name="searchname" required oninvalid="this.setCustomValidity('لطفا عبارت جست و جو را وارد کنید')" oninput="setCustomValidity('')" />
+            <input type="submit" value="جست و جو" />
+            <br />
+            <a asp-action="Music_Manage_Page" asp-controller="Music" asp-route-pageid="1">حذف فیلتر</a>
+        </form>
+    </div>
+
+
+
+
+
+
+    @if (Model.Musics.Count > 0)
+    {
+        <table>
+            <tr>
+                <th>
+                    کد آهنگ
+                </th>
+                <th>
+                    نام آهنگ
+                </th>
+                <th>
+                    توضیحات آهنگ
+                </th>
+                <th>
+                    سبک آهنگ
+                </th>
+                <th>
+                    تاریخ افزودن
+                </th>
+                <th>
+                    عکس کاور
+                </th>
+                <th>
+                    آهنگ
+                </th>
+                <th>
+                    وضعیت کامنت ها
+                </th>
+                <th>
+                    خوانندگان
+                </th>
+                <th>
+                    آلبوم
+                </th>
+                <th>
+                    نویسنده
+                </th>
+                <th>
+                    مدیریت
+                </th>
+            </tr>
+
+            @foreach (var allmusic in Model.Musics)
+            {
+                <tr>
+                    <td>@allmusic.SongId</td>
+                    <td>
+                        <a asp-action="Full_Song" asp-controller="Music" asp-route-songid="@allmusic.SongId">@allmusic.Song_Name</a>
+                    </td>
+                    <td>@allmusic.Song_Description</td>
+                    <td>@allmusic.Music_Style</td>
+                    <td>@DateCuclutor.Toshamsi(allmusic.Song_Date)</td>
+                    <td>
+                        <img src="~/Images/Music Image/@allmusic.Image_Filename" width="100px" height="100px" />
+                    </td>
+                    <td>
+                        <audio controls preload="none">
+                            <source src="~/Music/@allmusic.Song_FileName">
+                        </audio>
+                    </td>
+
+                    @if (allmusic.comment_status == 0)
+                    {
+                        <td>بسته</td>
+                    }
+                    @if (allmusic.comment_status == 1)
+                    {
+                        <td>تایید ادمین</td>
+                    }
+                    @if (allmusic.comment_status == 2)
+                    {
+                        <td>باز</td>
+                    }
+                    <td>
+                        @foreach (var singers in allmusic.singers)
+                        {
+                            <a asp-action="Singer_Info" asp-controller="Music" asp-route-singerid="@singers.SingerId"> @singers.artistName</a>
+                            <br />
+                        }
+                    </td>
+                    @if (allmusic.album == null)
+                    {
+                        <td>ندارد</td>
+                    }
+                    @if (allmusic.album != null)
+                    {
+                        <td>
+                            <a asp-action="Album_Deteil" asp-controller="Music" asp-route-albumid="@allmusic.album.AlbumId"> @allmusic.album.AlbumName </a>
+                        </td>
+                    }
+
+                    <td>@allmusic.admin.Admin_Name</td>
+                    <td>
+                        @{
+                            if (allmusic.album != null)
+                            {
+                                <a class="delete" asp-action="Remove_Music" asp-controller="Music" asp-route-musicid="@allmusic.SongId" asp-route-albumid="@allmusic.album.AlbumId">
+                                    حذف
+                                </a>
+                            }
+                            else
+                            {
+                                <a class="delete" asp-action="Remove_Music" asp-controller="Music" asp-route-musicid="@allmusic.SongId" asp-route-albumid="0">
+                                    حذف
+                                </a>
+                            }
+                        }
+                        <a class="edit" asp-action="Edit_Music_page" asp-controller="Music" asp-route-musicid="@allmusic.SongId">
+                            ویرایش
+                        </a>
+                        <a asp-action="Show_comment" asp-controller="Comment" asp-route-postid="@allmusic.SongId" asp-route-post_type="1">
+                            دیدن نظرات
+                        </a>
+                    </td>
+                </tr>
+            }
+        </table>
+
+        <div class="page_numbers">
+            @for (int i = 1; i <= ViewBag.pagecount; i++)
+            {
+                <a asp-action="Music_Manage_Page" asp-controller="Music" asp-route-pageid="@i" class="@((ViewBag.currentpage==i)?"active":"")">@i</a>
+            }
+
+        </div>
+    }
+    else
+    {
+        <h2>آهنگی موجود نیست</h2>
+    }
+
+}
+
+
+

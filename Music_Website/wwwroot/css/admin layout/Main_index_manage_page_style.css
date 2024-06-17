@@ -1,0 +1,112 @@
+﻿.selected_song {
+    width: 100%;
+    border: 2px solid yellow;
+}
+
+.song_name {
+    font-size: 150%;
+    color: white;
+    margin: 70px 10px 30px 20px;
+}
+
+    .song_name:hover {
+        color: yellow;
+    }
+
+.delete_selceted_song {
+    color: yellow;
+}
+
+    .delete_selceted_song:hover {
+        color: red;
+    }
+
+
+.selected_mv {
+    margin-top: 50px;
+    width: 100%;
+    border: 2px solid yellow;
+}
+
+.mv_name {
+    color: white;
+    font-size: 150%;
+    margin: 70px 10px 30px 20px;
+}
+
+    .mv_name:visited {
+        color: white;
+    }
+
+    .mv_name:hover {
+        color: yellow;
+    }
+
+.delete_mv {
+    color: yellow;
+}
+
+    .delete_mv:hover {
+        color: red;
+    }
+
+
+.select_new_mv_song {
+    /*border: 2px solid red;*/
+}
+
+.select_new_song {
+    width: 100%;
+    text-align: center;
+}
+
+    .select_new_song form {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        justify-content: space-between;
+        align-content:center;
+    }
+
+        .select_new_song form select {
+            width: 50%;
+            font-size: 120%;
+            background-color: silver;
+            min-height: 300px;
+            background-color:silver;
+            font-size:150%;
+        }
+        .select_new_song form input[type=submit]
+        {
+            width:50%;
+            background-color:yellow;
+            font-size:120%;
+        }
+
+.select_new_mv {
+    width: 100%;
+    border: 2px solid blue;
+    
+}
+.select_new_mv form
+{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    align-content:center;
+}
+    .select_new_mv form select {
+        width: 50%;
+        font-size: 150%;
+        background-color: rgba(41, 39, 37,0.5);
+        color: white;
+    }
+    .select_new_mv form input[type=submit] {
+        font-size: 120%;
+        background-color: silver;
+    }
+
+
+

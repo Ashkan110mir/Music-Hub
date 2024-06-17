@@ -1,0 +1,204 @@
+﻿@model List<Comments>
+@{
+    Layout = "../Shared/_admin_layout.cshtml";
+    ViewBag.title = "مدیریت نظرات";
+    <link rel="stylesheet" href="~/css/admin layout//Comment_manage_page_style.css" />
+}
+<table>
+    <tr>
+        <th>کد نظر</th>
+        <th>نام نویسنده نظر</th>
+        <th>ادرس ایمیل</th>
+        <th>متن نظر</th>
+        <th>پست اصلی</th>
+        <th>وضعیت تایید ادمین</th>
+        <th>عملیات</th>
+        <th>ثبت پاسخ</th>
+    </tr>
+    @if (Model.Count > 0)
+    {
+        @foreach (var comment in Model)
+        {
+
+            <tr class="main_comment">
+                <td>@comment.CommentId</td>
+                <td>@comment.comment_Name</td>
+                <td>@comment.Email_Address</td>
+                <td>@comment.Comment_Text</td>
+                <td>
+                    @{
+                        if (comment.music != null)
+                        {
+                            <a asp-action="Full_Song" asp-controller="Music" asp-route-songid="@comment.music.SongId">@comment.music.Song_Name</a>
+                        }
+                        if (comment.music_video != null)
+                        {
+                            <a asp-action="Full_Mv" asp-controller="Music" asp-route-mvid="@comment.music_video.MVId">@comment.music_video.Mvname</a>
+                        }
+                        if (comment.Remix != null)
+                        {
+                            <a asp-action="Full_remix" asp-controller="Music" asp-route-remixid="@comment.Remix.RemixId">@comment.Remix.RemixName</a>
+                        }
+                    }
+                </td>
+                @{
+                    if (comment.Admin_Accepted == false)
+                    {
+                        <td>تایید نشده</td>
+                    }
+                    else
+                    {
+                        <td>تایید شده</td>
+                    }
+                }
+                <td>
+                    @{
+                        if (ViewBag.posttype == 0)
+                        {
+                            <a asp-action="Delete_Comment" asp-controller="Comment" asp-route-commentid="@comment.CommentId">حذف نظر</a>
+                        }
+                        else
+                        {
+                            <a asp-action="Delete_Comment" asp-controller="Comment" asp-route-commentid="@comment.CommentId" asp-route-postid="@ViewBag.postid" asp-route-post_type="@ViewBag.posttype">حذف نظر</a>
+                        }
+                    }
+                    @{
+                        if (comment.Admin_Accepted == false)
+                        {
+                            if (ViewBag.posttype == 0)
+                            {
+                                <a asp-action="changecommentstatus" asp-controller="Comment" asp-route-commentid="@comment.CommentId" asp-route-commentstatuschange="1">تایید نظر</a>
+                            }
+                            else
+                            {
+                                <a asp-action="changecommentstatus" asp-controller="Comment" asp-route-commentid="@comment.CommentId" asp-route-commentstatuschange="1" asp-route-postid="@ViewBag.postid" asp-route-posttype="@ViewBag.posttype">تایید نظر</a>
+                            }
+                        }
+                        else
+                        {
+                            if (ViewBag.posttype == 0)
+                            {
+                                <a asp-action="changecommentstatus" asp-controller="Comment" asp-route-commentid="@comment.CommentId" asp-route-commentstatuschange="0">عدم تایید نظر</a>
+                            }
+                            else
+                            {
+                                <a asp-action="changecommentstatus" asp-controller="Comment" asp-route-commentid="@comment.CommentId" asp-route-commentstatuschange="0" asp-route-postid="@ViewBag.postid" asp-route-posttype="@ViewBag.posttype">عدم تایید نظر</a>
+
+                            }
+                        }
+                    }
+                </td>
+                <td>
+                    @{
+                        if (ViewBag.posttype == 0)
+                        {
+                            <form asp-action="Add_reply" asp-controller="Comment" asp-route-replaytext="replaytext" asp-route-commentid="@comment.CommentId" asp-route-replyto="@comment.comment_Name">
+                                <textarea name="replaytext"></textarea>
+                                <input type="submit" value="ثبت پاسخ" />
+                            </form>
+                        }
+                        else
+                        {
+                            <form asp-action="Add_reply" asp-controller="Comment" asp-route-replaytext="replaytext" asp-route-commentid="@comment.CommentId" asp-route-replyto="@comment.comment_Name" asp-route-postid="@ViewBag.postid" asp-route-posttype="@ViewBag.posttype">
+                                <textarea name="replaytext"></textarea>
+                                <input type="submit" value="ثبت پاسخ" />
+                            </form>
+                        }
+                    }
+                </td>
+            </tr>
+            @if (comment.Child != null)
+            {
+                @foreach (var child in comment.Child)
+                {
+                    <tr class="child_comment">
+                        <td class="first_child">@child.CommentId</td>
+                        <td>@child.comment_Name</td>
+                        <td>@child.Email_Address</td>
+                        <td>@child.Comment_Text</td>
+                        <td></td>
+                        @{
+                            if (child.Admin_Accepted == false)
+                            {
+                                <td>تایید نشده</td>
+                            }
+                            else
+                            {
+                                <td>تایید شده</td>
+                            }
+                        }
+                        <td>
+                            @{
+                                if (ViewBag.posttype == 0)
+                                {
+                                    <a asp-action="Delete_Comment" asp-controller="Comment" asp-route-commentid="@child.CommentId">حذف نظر</a>
+                                }
+                                else
+                                {
+                                    <a asp-action="Delete_Comment" asp-controller="Comment" asp-route-commentid="@child.CommentId" asp-route-postid="@ViewBag.postid" asp-route-post_type="@ViewBag.posttype">حذف نظر</a>
+                                }
+                            }
+                            @{
+                                if (child.Admin_Accepted == false)
+                                {
+                                    if (ViewBag.posttype == 0)
+                                    {
+                                        <a asp-action="changecommentstatus" asp-controller="Comment" asp-route-commentid="@child.CommentId" asp-route-commentstatuschange="1">تایید نظر</a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-action="changecommentstatus" asp-controller="Comment" asp-route-commentid="@child.CommentId" asp-route-commentstatuschange="1" asp-route-postid="@ViewBag.postid" asp-route-posttype="@ViewBag.posttype">تایید نظر</a>
+
+                                    }
+                                }
+                                else
+                                {
+                                    if (ViewBag.posttype == 0)
+                                    {
+                                        <a asp-action="changecommentstatus" asp-controller="Comment" asp-route-commentid="@child.CommentId" asp-route-commentstatuschange="0">عدم تایید نظر</a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-action="changecommentstatus" asp-controller="Comment" asp-route-commentid="@child.CommentId" asp-route-commentstatuschange="0" asp-route-postid="@ViewBag.postid" asp-route-posttype="@ViewBag.posttype">عدم تایید نظر</a>
+
+                                    }
+                                }
+                            }
+                        </td>
+                        <td>
+                            @{
+                                if (ViewBag.posttype == 0)
+                                {
+                                    <form asp-action="Add_reply" asp-controller="Comment" asp-route-replaytext="replaytext" asp-route-commentid="@comment.CommentId" asp-route-replyto="@child.comment_Name">
+                                        <textarea name="replaytext"></textarea>
+                                        <input type="submit" value="ثبت پاسخ" />
+                                    </form>
+                                }
+                                else
+                                {
+                                    <form asp-action="Add_reply" asp-controller="Comment" asp-route-replaytext="replaytext" asp-route-commentid="@comment.CommentId" asp-route-replyto="@child.comment_Name" asp-route-postid="@ViewBag.postid" asp-route-posttype="@ViewBag.posttype">
+                                        <textarea name="replaytext"></textarea>
+                                        <input type="submit" value="ثبت پاسخ" />
+                                    </form>
+                                }
+
+                            }
+                        </td>
+                    </tr>
+
+
+                }
+            }
+
+        }
+    }
+
+</table>
+@{
+    <div class="page_numbers">
+        @for (int i = 1; i <= ViewBag.pagecount; i++)
+        {
+            <a asp-action="Comment_manage_Page" asp-controller="Comment" asp-route-pageid="@i" class="@((ViewBag.currentpage==i)?"active":"")">@i</a>
+        }
+    </div>
+}

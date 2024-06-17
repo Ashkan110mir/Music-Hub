@@ -1,0 +1,27 @@
+﻿@model Singer;
+@{
+    Layout = "../Shared/_Admin_layout.cshtml";
+    <link rel="stylesheet" href="~/css/admin layout/Singer_manager_page_style.css" />
+    ViewBag.title = "ویرایش خواننده";
+}
+<span>/</span><a class="back_to_singer" asp-action="Singer_page" asp-controller="Singer">بازگشت به مدیریت خواننده ها</a>
+<h3>@ViewBag.error</h3>
+<div class="edit_singer">
+  
+    <form method="post" enctype="multipart/form-data" asp-action="Edit_Singer" asp-controller="Singer" asp-route-id="@Model.SingerId" asp-route-pic="@Model.profile_picture_name">
+        <label for="singername">نام خواننده</label>
+        <input type="text" id="singername" name="SingerName" value="@Model.SingerName" />
+
+        <label for="singerlname">نام خوانوادگی خواننده</label>
+        <input type="text" id="singerlname" name="Singer_Lastname" value="@Model.Singer_Lastname" />
+
+        <label for="artistname">نام هنری </label>
+        <input type="text" id="artistname" name="artistName" value="@Model.artistName" />
+        <img src="/Images/Singer Image/@Model.profile_picture_name" width="100px" height="100px" />
+
+        <input type="file" value="/Images/Singer Image/@Model.profile_picture_name" name="Picture_File" />
+
+        <input type="submit" value="ویرایش" />
+
+    </form>
+</div>

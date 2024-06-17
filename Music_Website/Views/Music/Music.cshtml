@@ -1,0 +1,102 @@
+﻿@model List<Music>;
+@{
+    Layout = "../Shared/_main_layout.cshtml";
+    ViewBag.title = "آهنگ ها";
+    <link rel="stylesheet" href="~/css/Music_Page_Style.css" />
+
+}
+<br />
+<h1>آهنگ ها</h1>
+<section class="main">
+    
+    <div class="search_song">
+        <h2>جست و جو کنید</h2>
+        <form asp-action="music_page" asp-controller="Music" asp-route-searchname="searchname" asp-route-searchsinger="searchsinger" asp-route-searchstyle="searchstyle" asp-route-orderby="orderby">
+
+            <label for="searchname">نام آهنگ:</label>
+            <input type="search" id="searchname" name="searchname" value="@((ViewBag.searchname!=null? ViewBag.searchname : null))" />
+
+            <label for="singersearch">نام خواننده:</label>
+            <input type="search" id="singersearch" name="searchsinger" value="@(ViewBag.searchsinger!=null? ViewBag.searchsinger :null)" />
+
+            <label for="searchstyle">سبک آهنگ:</label>
+            <select itemid="searchstyle" name="searchstyle">
+                <option value="رپ">رپ</option>
+                <option value="کلاسیک">کلاسیک</option>
+                <option value="سنتی">سنتی</option>
+                <option value="راک">راک</option>
+                <option value="پاپ">پاپ</option>
+                <option value="متال">متال</option>
+                <option value="پانک">پانک</option>
+            </select>
+
+            <label for="orderbysearch">مرتبی سازی بر اساس:</label>
+            <select name="orderby" id="orderbysearch">
+                @{
+                    if (ViewBag.orderby == "orderbyname")
+                    {
+                        <option value="orderbyname" selected>مرتب سازی بر اساس نام</option>
+                        <option value="orderbydateLast">مرتب سازی بر اساس آخرین</option>
+                        <option value="orderbydateFirst">مرتب سازی بر اساس اولین</option>
+                    }
+                    else if (ViewBag.orderby == "orderbydateLast")
+                    {
+                        <option value="orderbyname">مرتب سازی بر اساس نام</option>
+                        <option value="orderbydateLast" selected>مرتب سازی بر اساس آخرین</option>
+                        <option value="orderbydateFirst">مرتب سازی بر اساس اولین</option>
+                    }
+                    else
+                    {
+                        <option value="orderbyname">مرتب سازی بر اساس نام</option>
+                        <option value="orderbydateLast">مرتب سازی بر اساس آخرین</option>
+                        <option value="orderbydateFirst" selected>مرتب سازی بر اساس اولین</option>
+                    }
+                }
+            </select>
+            <div>
+                <a asp-action="music_page" asp-controller="Music" asp-route-music_page="1">حذف فیلتر ها</a>
+                <input type="submit" value="جست و جو" />
+            </div>
+        </form>
+    </div>
+
+    <div class="music_list">
+        @foreach (var music in Model)
+        {
+            <article class="music">
+                <a class="readmore" asp-action="Full_Song" asp-controller="Music" asp-route-songid="@music.SongId">@music.Song_Name</a>
+                <img src="~/Images/Music Image/@music.Image_Filename" />
+                <div class="singer_cointaner">
+                    <a>خواننده ها:</a>
+                    @{
+                        foreach (var singer in music.singers)
+                        {
+                            <a asp-action="Singer_Info" asp-controller="Music" asp-route-singerid="@singer.SingerId">@singer.artistName</a>
+                        }
+                    }
+                </div>
+
+                <div>
+                    <div>تاریخ: @DateCuclutor.Toshamsi(music.Song_Date)</div>
+                    <a asp-action="Full_Song" asp-controller="Music" asp-route-songid="@music.SongId">ادامه مطلب و دانلود</a>
+                </div>
+
+
+            </article>
+        }
+    </div>
+    <div class="last_song">
+    </div>
+
+</section>
+<section class="music_footer">
+    <div class="pagecontainer">
+        @{
+            for (int i = 1; i <= @ViewBag.pagecount; i++)
+            {
+                <a asp-action="music_page" asp-controller="Music" asp-route-searchname="@ViewBag.searchname" asp-route-searchsinger="@ViewBag.searchsinger" asp-route-searchstyle="@ViewBag.searchstyle" asp-route-orderby="@ViewBag.orderby" asp-route-pageid="@i" class="@((ViewBag.curentpage==i)?"active":"")">@i</a>
+            }
+
+        }
+    </div>
+</section>
