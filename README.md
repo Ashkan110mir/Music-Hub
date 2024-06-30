@@ -1,7 +1,3 @@
-"A music and music video download site with a dedicated admin panel and the ability to post comments, focused on the backend (the frontend of the site is awful XD )."
-
-
-
-
-
-
+A website for downloading songs, music videos, and remixes with many-to-many relationships and a dedicated admin panel.
+This website is implemented using a code-first approach.
+https://github.com/Ashkan110mir/Music-Hub/blob/master/Capture_2024_06_30_13_16_11_849.png
