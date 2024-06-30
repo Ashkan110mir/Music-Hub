@@ -6,10 +6,7 @@ The database schema can be seen in the image below.
 ![Description of the image](https://github.com/Ashkan110mir/Music-Hub/blob/master/Capture_2024_06_30_13_16_11_849.png)
 
 Requirements:
-Visual Studio 2022
-Sql Server
-.Net 6.0
-.Net Runtime 6.0
+Visual Studio 2022 -- Sql Server -- .Net 6.0 -- .Net Runtime 6.0
 
 The complete project documentation is available in the file Music_hub Document.pdf.
 
